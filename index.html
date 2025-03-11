@@ -3,58 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gokula Krishna Tavva - Aerospace Portfolio</title>
+    <title>Gokula Krishna Tavva</title>
     <style>
-        body { font-family: 'Orbitron', sans-serif; line-height: 1.6; background-color: #0a192f; color: #ccd6f6; margin: 0; padding: 0; }
-        header { background: #002855; color: #00bcd4; padding: 50px; text-align: center; }
-        .container { width: 90%; margin: 20px auto; max-width: 1200px; }
-        h1 { color: #00bcd4; text-transform: uppercase; letter-spacing: 2px; }
-        h2 { color: #00bcd4; border-bottom: 3px solid #00bcd4; padding-bottom: 5px; }
-        .section { background: #112240; padding: 20px; border-radius: 12px; border-left: 5px solid #00bcd4; box-shadow: 0 6px 15px rgba(0, 188, 212, 0.3); margin-bottom: 20px; }
-        a { color: #00bcd4; text-decoration: none; }
-        a:hover { color: #4CAF50; text-decoration: underline; }
-        .highlight { color: #4CAF50; font-weight: bold; }
+        body { font-family: Arial, sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 0; }
+        header { background: #1f1f1f; color: #b5e853; padding: 20px 0; text-align: center; }
+        header h1 { margin: 0; font-size: 32px; }
+        header h2 { margin: 0; font-size: 18px; color: #aaa; }
+        .profile-photo img { width: 150px; height: 200px; border-radius: 50%; border: 3px solid #b5e853; margin-bottom: 7px; }
+        .nav-links { margin-top: 10px; }
+        .nav-links a { color: #b5e853; margin: 0 10px; text-decoration: none; cursor: pointer; }
+        .container { width: 90%; margin: 20px auto; max-width: 1000px; background: #1e1e1e; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); display: none; }
+        h2 { color: #b5e853; border-bottom: 2px solid #b5e853; padding-bottom: 5px; margin-top: 30px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 8px; }
+        a { color: #4FC3F7; text-decoration: none; }
+        a:hover { text-decoration: underline; }
     </style>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.container');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>Gokula Krishna Tavva</h1>
-        <p class="highlight">Mechanical Engineer | CAD Designer | UAV Developer</p>
+        <h2>Mechanical Engineering Student</h2>
+        <div class="nav-links">
+            [ <a onclick="showSection('about')">About Me</a> |
+            <a onclick="showSection('experience')">Experience</a> |
+            <a onclick="showSection('projects')">Projects</a> |
+            <a onclick="showSection('publications')">Publications</a> |
+            <a onclick="showSection('contact')">Contact</a> ]
+        </div>
     </header>
 
-    <div class="container">
-        <div class="section">
-            <h2>About Me</h2>
-            <p>I'm a dedicated mechanical engineering student at BITS Pilani with expertise in CAD design, UAV testing, and technical project development. Passionate about aerospace engineering and innovation.</p>
-            <p>Experienced in designing efficient heat exchangers, developing UAVs, and leading teams to achieve competitive success.</p>
+    <div class="container" id="about">
+        <h2>About Me</h2>
+        <div class="profile-photo">
+            <img src="images/profile.jpg" alt="Gokula Krishna Tavva">
         </div>
+        <p>I'm a dedicated mechanical engineering student at BITS Pilani with expertise in CAD design, UAV testing, and technical project development. Passionate about aerospace engineering and innovation.</p>
+        <h2>Education</h2>
+        <ul>
+            <li>Bachelor of Engineering in Mechanical Engineering, BITS Pilani (GPA: 9.08/10)</li>
+            <li>High School - Science, Narayana Group Of Institutions, Hyderabad (Percentage: 97.9%)</li>
+        </ul>
+    </div>
 
-        <div class="section">
-            <h2>Education</h2>
-            <p>Bachelor of Engineering in <span class="highlight">Mechanical Engineering</span><br>Birla Institute of Technology and Science, Pilani (GPA: 9.08/10)</p>
-        </div>
+    <div class="container" id="experience">
+        <h2>Experience</h2>
+        <ul>
+            <li>Undergraduate Teaching Assistant – BITS Pilani</li>
+            <li>Team Captain – Inspired Karters Gravity</li>
+            <li>Flight Testing Engineer and CAD Designer – Vimana Aerotech</li>
+            <li>Summer Intern – TATA Advanced Systems Limited</li>
+        </ul>
+    </div>
 
-        <div class="section">
-            <h2>Experience</h2>
-            <p><strong>Undergraduate Teaching Assistant</strong> – BITS Pilani<br>Guided students in thermodynamics and workshop procedures.</p>
-            <p><strong>Team Captain</strong> – Inspired Karters Gravity<br>Led a 60-member team achieving All-India Rank 10 in ISIE IKR Competition.</p>
-            <p><strong>Flight Testing Engineer and CAD Designer</strong> – Vimana Aerotech<br>Beta tested UAVs and developed CAD models for custom mounts and hatches.</p>
-            <p><strong>Summer Intern</strong> – TATA Advanced Systems Limited<br>Developed a color-coded fixture management system improving efficiency by 80%.</p>
-        </div>
+    <div class="container" id="projects">
+        <h2>Projects</h2>
+        <ul>
+            <li>Simulation Study of Lanced Offset Fins of Compact Heat Exchangers</li>
+            <li>Compact Refrigeration System for Fishing Boats</li>
+            <li>PV Cell Performance Using Magnetic Nanofluids</li>
+        </ul>
+    </div>
 
-        <div class="section">
-            <h2>Projects</h2>
-            <p><strong>Numerical Analysis on Offset Strip Fins</strong><br>Improved heat transfer study with 10% higher accuracy in predictions.</p>
-            <p><strong>PV Cell Performance Using Magnetic Nanofluids</strong><br>Developed a cooling system improving efficiency by 5%.</p>
-        </div>
+    <div class="container" id="publications">
+        <h2>Publications & Certifications</h2>
+        <ul>
+            <li>Vimana Aerotech Paper – Presented at the 75th International Astronautical Congress</li>
+            <li>SOLIDWORKS CAD Design Associate (CSWA) – Dassault Systèmes</li>
+            <li>Flight Mechanics-The Basics – Certified by ISAE-SUPAERO</li>
+        </ul>
+    </div>
 
-        <div class="section">
-            <h2>Contact</h2>
-            <p>Email: <a href="mailto:gktavva@gmail.com">gktavva@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/gokula-krishna-tavva/">Gokula Krishna Tavva</a></p>
-            <p>GitHub: <a href="https://github.com/GKTavva">GKTavva</a></p>
-        </div>
+    <div class="container" id="contact">
+        <h2>Contact</h2>
+        <ul>
+            <li>Email: <a href="mailto:gktavva@gmail.com">gktavva@gmail.com</a></li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/gokula-krishna-tavva/">Gokula Krishna Tavva</a></li>
+            <li>GitHub: <a href="https://github.com/GKTavva">GKTavva</a></li>
+        </ul>
     </div>
 </body>
 </html>
