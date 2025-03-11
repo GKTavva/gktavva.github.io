@@ -9,11 +9,13 @@
         header { background: #1f1f1f; color: #b5e853; padding: 20px 0; text-align: center; }
         header h1 { margin: 0; font-size: 32px; }
         header h2 { margin: 0; font-size: 18px; color: #aaa; }
-        .profile-photo img { width: 150px; height: 200px; border-radius: 50%; border: 3px solid #b5e853; margin-bottom: 7px; }
+        .profile-photo img { width: 150px; height: 200px; border-radius: 50%; border: 3px solid #b5e853; margin-bottom: 10px; object-fit: cover; }
         .nav-links { margin-top: 10px; }
         .nav-links a { color: #b5e853; margin: 0 10px; text-decoration: none; cursor: pointer; }
-        .container { width: 90%; margin: 20px auto; max-width: 1000px; background: #1e1e1e; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); display: none; }
+        .container { width: 90%; margin: 20px auto; max-width: 1000px; background: #1e1e1e; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
+        .hidden { display: none; }
         h2 { color: #b5e853; border-bottom: 2px solid #b5e853; padding-bottom: 5px; margin-top: 30px; }
+        h3 { color: #b5e853; margin-top: 20px; }
         ul { list-style-type: none; padding: 0; }
         li { margin-bottom: 8px; }
         a { color: #4FC3F7; text-decoration: none; }
@@ -22,8 +24,11 @@
     <script>
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.container');
-            sections.forEach(section => section.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
+            sections.forEach(section => section.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+        window.onload = function() {
+            showSection('about');
         }
     </script>
 </head>
@@ -33,9 +38,9 @@
         <h2>Mechanical Engineering Student</h2>
         <div class="nav-links">
             [ <a onclick="showSection('about')">About Me</a> |
-            <a onclick="showSection('experience')">Experience</a> |
-            <a onclick="showSection('projects')">Projects</a> |
-            <a onclick="showSection('publications')">Publications</a> |
+            <a onclick="showSection('research')">Research Experience</a> |
+            <a onclick="showSection('experience')">Work Experience</a> |
+            <a onclick="showSection('certifications')">Certifications & Extracurricular</a> |
             <a onclick="showSection('contact')">Contact</a> ]
         </div>
     </header>
@@ -45,43 +50,77 @@
         <div class="profile-photo">
             <img src="images/profile.jpg" alt="Gokula Krishna Tavva">
         </div>
-        <p>I'm a dedicated mechanical engineering student at BITS Pilani with expertise in CAD design, UAV testing, and technical project development. Passionate about aerospace engineering and innovation.</p>
+        <p>I'm a dedicated mechanical engineering student at BITS Pilani with expertise in CAD design and Simulations. Driven by a deep passion for hypersonics with a dedicated goal of becoming an aerospace engineer.</p>
         <h2>Education</h2>
         <ul>
             <li>Bachelor of Engineering in Mechanical Engineering, BITS Pilani (GPA: 9.08/10)</li>
-            <li>High School - Science, Narayana Group Of Institutions, Hyderabad (Percentage: 97.9%)</li>
+        </ul>
+        <h2>Technical Skills</h2>
+        <ul>
+            <li>Designing: Creo Parametric, Solidworks, Fusion 360, AutoCAD, OpenVSP, Altair Inspire</li>
+            <li>Simulation: Ansys Structural, Ansys Fluent, OpenFOAM, Basilisk C, Simscale</li>
+            <li>Others: Matlab, Simulink, C Programming, Ardupilot</li>
         </ul>
     </div>
 
-    <div class="container" id="experience">
+    <div class="container hidden" id="research">
+        <h2>Research Experience</h2>
+        <h3>Projects</h3>
+        <ul>
+            <li><strong>Flow Analysis of a Multi-stage Dehumidifying Chamber</strong><br>
+            Performing simulations on a multi-stage conveyor-style dehumidifying system designed for waste management to
+            optimize airflow and enhance system efficiency.</li>
+            <li><strong>Numerical Analysis on 'j' and 'f' Factor for Offset Strip Fins</strong><br>
+            Improved empirical correlations by varying fin flow length, achieving higher accuracy in heat transfer predictions.</li>
+            <li><strong>PV Cell Performance Using Magnetic Nanofluids</strong><br>
+            Designed and fabricated a magnetic nanofluids-based solar PV cooling setup with 5% better efficiency than water cooling.</li>
+        </ul>
+        <h3>Publications</h3>
+        <ul>
+            <li><strong>Vimana Aerotech and the development of a tail-sitter VTOL drone for research as well as commercial
+                facilitation - (International Astronautical Federation) </strong><br>
+                Co-author in the paper published in the proceedings of the 75th International Astronautical Congress in Milan, Italy.</li> 
+        </ul>
+        <h3>Conferences</h3>
+        <ul>
+            <li><strong>ICGTME Conference</strong><br> 
+                Presented correlations of Colburn 'j' factor for offset strip fins in laminar and turbulent flow regimes. Awarded Best Presentation among 134 papers.</li>
+        </ul>
+    </div>
+
+    <div class="container hidden" id="experience">
         <h2>Experience</h2>
         <ul>
-            <li>Undergraduate Teaching Assistant – BITS Pilani</li>
-            <li>Team Captain – Inspired Karters Gravity</li>
-            <li>Flight Testing Engineer and CAD Designer – Vimana Aerotech</li>
-            <li>Summer Intern – TATA Advanced Systems Limited</li>
+            <li><strong>Simulation Engineer – Serendipity Space, Munich, Germany</strong><br>
+            Executing thermal simulations for a space payload studying pharmaceutical stability in zero-gravity.</li>
+            <li><strong>Undergraduate Teaching Assistant – BITS Pilani, India</strong><br>
+            - Workshop Division: Aiding in preparing SOPs and lab manuals.</li>
+            - Applied Thermodynamics(ME F214): Aided the faculty in conducting the evaluations.</li>
+            <li><strong>Summer Intern – TATA Advanced Systems Limited, Nagpur, India</strong><br>
+            Developed a color-coded fixture management system improving efficiency by 80%.</li>
+            <li><strong>Flight Testing Engineer and CAD Designer – Vimana Aerotech, Pilani, India</strong><br>
+            Beta tested a tail-sitter UAV and designed custom mounts and hatches for a hexacopter.</li>
         </ul>
     </div>
 
-    <div class="container" id="projects">
-        <h2>Projects</h2>
+    <div class="container hidden" id="certifications">
+        <h2>Certifications & Extracurricular</h2>
+        <h3>Certifications</h3>
         <ul>
-            <li>Simulation Study of Lanced Offset Fins of Compact Heat Exchangers</li>
-            <li>Compact Refrigeration System for Fishing Boats</li>
-            <li>PV Cell Performance Using Magnetic Nanofluids</li>
-        </ul>
-    </div>
-
-    <div class="container" id="publications">
-        <h2>Publications & Certifications</h2>
-        <ul>
-            <li>Vimana Aerotech Paper – Presented at the 75th International Astronautical Congress</li>
             <li>SOLIDWORKS CAD Design Associate (CSWA) – Dassault Systèmes</li>
             <li>Flight Mechanics-The Basics – Certified by ISAE-SUPAERO</li>
         </ul>
+        <h3>Extracurricular Activities</h3>
+        <ul>
+            <li><strong>Team Captain</strong> – Inspired Karters Gravity</li>
+            Spearheading a 60-member team, I guided our efforts to achieve All-India Rank 10 in the electric category of a national-level Competition. Earlier, I also drafted the complete go-kart, overseeing all
+            phases of the project. <li>
+            <li><strong>Structural and Dynamics Engineer</strong> – Team BITS</li>
+            Assisted the team in designing a carbon fiber monocoque chassis with a Cd of 0.18 for the prototype class of Shell Eco-Marathon. <li>
+        </ul>
     </div>
 
-    <div class="container" id="contact">
+    <div class="container hidden" id="contact">
         <h2>Contact</h2>
         <ul>
             <li>Email: <a href="mailto:gktavva@gmail.com">gktavva@gmail.com</a></li>
