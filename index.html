@@ -53,7 +53,7 @@
             <a href="#" onclick="showSection('research')">Research Experience</a> |
             <a href="#" onclick="showSection('experience')">Work Experience</a> |
             <a href="#" onclick="showSection('certifications')">Certifications & Extracurricular</a> |
-            <a href="#" onclick="showSection('contact')">Contact</a> |
+            <a href="#" onclick="showSection('contact')">Contact Me</a> |
             <a href="#" onclick="showSection('cv')">Curriculum Vitae</a> ]
         </div>
     </header>
@@ -120,7 +120,23 @@
         </div>
 
         <div class="container hidden" id="contact">
-            <h2>Contact</h2>
+            <section id="contact" class="contact-section" style="padding: 2rem 0;">
+            <h2 style="color: #a8ff60; margin-bottom: 1rem;">Fill the below form</h2>
+            
+            <div style="display: flex; justify-content: center;">
+                <iframe 
+                src="https://docs.google.com/forms/d/e/1FAIpQLSfRFiBaxEzls_lSytPirDeTVyolXH8NffBOYhbQqRyS9PinZQ/viewform?embedded=true" 
+                width="100%" 
+                height="800" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0"
+                style="max-width: 800px; border: none; background-color: transparent;">
+                Loading…
+                </iframe>
+            </div>
+
+            <h2>Reach out to me directly on:</h2>
             <ul>
                 <li>Personal Email: <a href="mailto:gktavva@gmail.com">gktavva@gmail.com</a></li>
                 <li>University Email: <a href="mailto:f20220372@pilani.bits-pilani.ac.in">f20220372@pilani.bits-pilani.ac.in</a></li>
@@ -128,13 +144,10 @@
                 <li>LinkedIn: <a href="https://www.linkedin.com/in/gokula-krishna-tavva/">Gokula Krishna Tavva</a></li>
                 <li>GitHub: <a href="https://github.com/GKTavva">GKTavva</a></li>
             </ul>
-            <h3>Contact Form</h3>
-            <form action="mailto:gktavva@gmail.com" method="post" enctype="text/plain">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                <input type="submit" value="Send">
-            </form>
+            
+            
+            </section>
+
         </div>
 
         <div class="container hidden" id="cv">
