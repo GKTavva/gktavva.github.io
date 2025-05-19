@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gokula Krishna Tavva</title>
     <style>
+        html { scroll-behavior: smooth; }
         body { font-family: Arial, sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 0; }
         header { background: #1f1f1f; color: #b5e853; padding: 20px 0; text-align: center; }
         header h1 { margin: 0; font-size: 32px; }
         header h2 { margin: 0; font-size: 18px; color: #aaa; }
+        .profile-photo {
+        text-align: center;
+        margin-bottom: 20px;}
         .profile-photo img { width: 150px; height: 200px; border-radius: 50%; border: 3px solid #b5e853; margin-bottom: 10px; object-fit: cover; }
         .nav-links { margin-top: 10px; }
         .nav-links a { color: #b5e853; margin: 0 10px; text-decoration: none; cursor: pointer; }
-        .container { width: 90%; margin: 20px auto; max-width: 1000px; background: #1e1e1e; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
+        .nav-links a:hover, .nav-links a.active { text-decoration: underline; color: #ffffff; font-weight: bold; }
+        .container { width: 100%; margin: 20px auto; background: #1e1e1e; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); box-sizing: border-box; }
         .hidden { display: none; }
         h2 { color: #b5e853; border-bottom: 2px solid #b5e853; padding-bottom: 5px; margin-top: 30px; }
         h3 { color: #b5e853; margin-top: 20px; }
@@ -20,12 +25,19 @@
         li { margin-bottom: 8px; }
         a { color: #4FC3F7; text-decoration: none; }
         a:hover { text-decoration: underline; }
+        input, textarea { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; background-color: #2e2e2e; color: #fff; }
+        input[type="submit"] { background-color: #b5e853; color: #000; cursor: pointer; border: none; }
+        .card { background: #2a2a2a; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .card strong { color: #b5e853; display: block; margin-bottom: 5px; }
     </style>
     <script>
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.container');
             sections.forEach(section => section.classList.add('hidden'));
             document.getElementById(sectionId).classList.remove('hidden');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
         }
         window.onload = function() {
             showSection('about');
@@ -37,111 +49,99 @@
         <h1><a href="#" onclick="showSection('about')" style="color: inherit; text-decoration: none;">Gokula Krishna Tavva</a></h1>
         <h2>Mechanical Engineering Student</h2>
         <div class="nav-links">
-            [ <a onclick="showSection('about')">About Me</a> |
-            <a onclick="showSection('research')">Research Experience</a> |
-            <a onclick="showSection('experience')">Work Experience</a> |
-            <a onclick="showSection('certifications')">Certifications & Extracurricular</a> |
-            <a onclick="showSection('contact')">Contact</a> |
-            <a onclick="showSection('cv')">Curriculum Vitae</a> ]
+            [ <a href="#" onclick="showSection('about')">About Me</a> |
+            <a href="#" onclick="showSection('research')">Research Experience</a> |
+            <a href="#" onclick="showSection('experience')">Work Experience</a> |
+            <a href="#" onclick="showSection('certifications')">Certifications & Extracurricular</a> |
+            <a href="#" onclick="showSection('contact')">Contact</a> |
+            <a href="#" onclick="showSection('cv')">Curriculum Vitae</a> ]
         </div>
     </header>
-<body>
 
-
-    <div class="container" id="about">
-        <h2>About Me</h2>
-        <div class="profile-photo">
-            <img src="images/profile.jpg" alt="Gokula Krishna Tavva">
+    <main>
+        <div class="container" id="about">
+            <h2>About Me</h2>
+            <div class="profile-photo">
+                <img src="images/profile.jpg" alt="Gokula Krishna Tavva">
+            </div>
+            <p>I am a dedicated Mechanical Engineering student at BITS Pilani, with a strong foundation in CAD design, thermal systems, and simulation-based analysis. I hail from Hyderabad, Telangana, and my academic journey has been shaped by a deep-rooted passion for aerodynamics and an evolving fascination with hypersonic flows and their application in next-generation aerospace systems.<br> <br>
+                Driven by curiosity and a commitment to excellence, I aspire to pursue a master's degree and further research in aerospace engineering, particularly in high-speed flow dynamics. My goal is to contribute meaningfully to the advancement of the field through cutting-edge innovation and collaborative research.<br> <br>
+                Beyond technical expertise, I value interdisciplinary exposure and teamwork, which I believe are essential for engineering impactful, real-world solutions. I aim to apply these strengths to develop sustainable, socially relevant technologies that bridge the domains of mechanical and aerospace engineering.</p>
+            <h2>Education</h2>
+            <div class="card">Bachelor of Engineering in Mechanical Engineering, BITS Pilani (CGPA: 9.08/10)</div>
+            <h2>Technical Skills</h2>
+            <div class="card">Simulation: Ansys Fluent, OpenFOAM, Ansys Structural, Basilisk C, Simscale</div>
+            <div class="card">Designing: Creo Parametric, Solidworks, Fusion 360, AutoCAD, OpenVSP, Altair Inspire</div>
+            <div class="card">Others: Matlab, Simulink, C Programming, Ardupilot</div>
         </div>
-        <p>I'm a dedicated mechanical engineering student at BITS Pilani with expertise in CAD design and Simulations. Driven by a deep passion for aerodynamics and hypersonics with a dedicated goal of becoming an aerospace engineer.</p>
-        <h2>Education</h2>
-        <ul>
-            <li>Bachelor of Engineering in Mechanical Engineering, BITS Pilani (CGPA: 9.08/10)</li>
-        </ul>
-        <h2>Technical Skills</h2>
-        <ul>
-            
-            <li>Simulation: Ansys Fluent, OpenFOAM, Ansys Structural, Basilisk C, Simscale </li>
-            <li>Designing: Creo Parametric, Solidworks, Fusion 360, AutoCAD, OpenVSP, Altair Inspire</li>
-            <li>Others: Matlab, Simulink, C Programming, Ardupilot</li>
-        </ul>
-    </div>
 
+        <div class="container hidden" id="research">
+            <h2>Research Experience</h2>
+            <h3>Projects</h3>
+            <div class="card"><strong>Flow Analysis of a Multi-stage Dehumidifying Chamber</strong>Simulations conducted on a multi-stage conveyor-style system to optimize airflow and regulate output humidity.</div>
+            <div class="card"><strong>Simulation Study of Lanced Offset Fins of Compact Heat Exchangers</strong>Explored heat transfer enhancements by varying flow length, fin thickness, and spacing in offset fins.</div>
+            <div class="card"><strong>Compact Refrigeration System for Fishing Boats</strong>Improved 3D models for compact, manufacturable, and repairable systems for Indo-Norway industry applications.</div>
+            <div class="card"><strong>PV Cell Performance with Magnetic Nanofluids</strong>Developed a cooling setup using nanofluids to improve solar panel efficiency via magnetic fluid dynamics.</div>
+            <div class="card"><strong>EV Battery Thermal Analysis Using PCM and Nanofluids</strong>Designed vibration-resistant heat rejection systems for improved battery and motor thermal management.</div>
 
-    <div class="container hidden" id="research">
-        <h2>Research Experience</h2>
-        <h3>Projects</h3>
-        <ul>
-            <li><strong>Flow Analysis of a Multi-stage Dehumidifying Chamber</strong><br> Conducting simulations on a multi-stage conveyor-style dehumidifying system to optimize airflow and ensure output relative humidity stays within desired ranges.</li>
-            <li><strong>Simulation Study of Lanced Offset Fins of Compact Heat Exchangers</strong><br> Aims to improve understanding of heat transfer using lanced offset fins by varying design parameters like flow length, fin thickness, and spacing.</li>
-            <li><strong>Compact Refrigeration System for Fishing Boats</strong><br> Assisted in 3D modeling and improving refrigeration system’s compactness, manufacturability, and repairability for the Indo-Norway fishing industry project.</li>
-            <li><strong>Experimental Study on PV Cell Performance with Magnetic Nanofluids</strong><br> Designed and fabricated a magnetic nanofluid-based solar PV cooling experimental setup, improving panel efficiency.</li>
-            <li><strong>EV Battery Thermal Analysis Using PCM and Nanofluids under Vibration</strong><br> Designed a heat rejection system using PCM and nanofluids to enhance battery and motor heat management under vehicle vibrations.</li>
-        </ul>
-    </ul>
-    <h3>Publications</h3>
-    <ul>
-        <li>
-            <strong>
-                <a href="https://www.researchgate.net/publication/388585486_Vimana_Aerotech_and_the_Development_of_a_Tail-Sitter_VTOL_Drone_for_Research_as_Well_as_Commercial_Facilitation">
-                    Vimana Aerotech and the development of a tail-sitter VTOL drone for research as well as commercial facilitation - (International Astronautical Federation)
-                </a>
-            </strong><br>
-            Co-author in the paper published in the proceedings of the 75th International Astronautical Congress in Milan, Italy.
-        </li>
-         
-    </ul>
-    <h3>Conferences</h3>
-    <ul>
-        <li><strong>ICGTME</strong><br> 
-            Presented correlations of Colburn 'j' factor for offset strip fins in laminar and turbulent flow regimes. Awarded the best presentation among 134 papers.</li>
-    </ul>
-    </div>
+            <h3>Publications</h3>
+            <div class="card">
+                <strong>
+                    <a href="https://www.researchgate.net/publication/388585486_Vimana_Aerotech_and_the_Development_of_a_Tail-Sitter_VTOL_Drone_for_Research_as_Well_as_Commercial_Facilitation">
+                        Vimana Aerotech and the development of a tail-sitter VTOL drone for research and commercial facilitation
+                    </a>
+                </strong>
+                Co-authored paper published at the 75th International Astronautical Congress, Milan, Italy.
+            </div>
 
-    <div class="container hidden" id="experience">
-        <h2>Work Experience</h2>
-        <ul>
-            <li><strong>Simulation Engineer – Serendipity Space - Remote</strong><br> Executing thermal simulations for a space payload studying pharmaceutical stability in zero-gravity.</li>
-            <li><strong>Undergraduate Teaching Assistant – BITS Pilani - Pilani, India</strong><br> 
-                <li>- Workshop Division: Aiding in preparing SOPs and lab manuals.</li>
-                <li>- Applied Thermodynamics (ME F214): Aided the faculty in conducting the evaluations.</li></li>
-            <li><strong>Summer Intern – TATA Advanced Systems Limited - Nagpur, India</strong><br> Developed a color-coded fixture management system improving efficiency by 80%.</li>
-            <li><strong>Flight Testing Engineer & CAD Designer – Vimana Aerotech - Pilani, India</strong><br> Designed custom mounts for UAVs and beta-tested a tail-sitter drone for extended flight durations.</li>
-        </ul>
-    </div>
+            <h3>Conferences</h3>
+            <div class="card"><strong>ICGTME Conference</strong>Presented research on Colburn ‘j’ factor for offset strip fins in laminar and turbulent regimes. <em>Awarded Best Presentation among 134 papers.</em></div>
+        </div>
 
-    <div class="container hidden" id="certifications">
-        <h2>Certifications & Extracurricular</h2>
-        <h3>Certifications</h3>
-        <ul>
-            <li>SOLIDWORKS CAD Design Associate (CSWA) – Dassault Systèmes</li>
-            <li>Flight Mechanics-The Basics – Certified by ISAE-SUPAERO</li>
-        </ul>
-        <h3>Extracurricular Activities</h3>
-        <ul>
-            <li><strong>Team Captain</strong> – Inspired Karters Gravity</li>
-            Spearheading a 40-member team, I guided our efforts to achieve All-India Rank 10 in the electric category of a national-level Competition. Earlier, I also drafted the complete go-kart, overseeing all
-            phases of the project. <li>
-            <li><strong>Structural and Dynamics Engineer</strong> – Team BITS</li>
-            Assisted the team in designing a carbon fiber monocoque chassis with a Cd of 0.18 for the prototype class of Shell Eco-Marathon. <li>
-        </ul>
-    </div>
+        <div class="container hidden" id="experience">
+            <h2>Work Experience</h2>
+            <div class="card"><strong>Simulation Engineer – Serendipity Space</strong>Executed thermal simulations for a space payload studying pharmaceutical stability in zero-gravity.</div>
+            <div class="card"><strong>Undergraduate Teaching Assistant – BITS Pilani</strong><br>Workshop Division: Prepared SOPs and lab manuals.<br>Applied Thermodynamics: Supported evaluations and student engagement.</div>
+            <div class="card"><strong>Summer Intern – TATA Advanced Systems Limited</strong>Developed a color-coded fixture management system improving efficiency by 80%.</div>
+            <div class="card"><strong>Flight Testing Engineer & CAD Designer – Vimana Aerotech</strong>Designed custom UAV mounts and beta-tested tail-sitter drone for extended endurance.</div>
+        </div>
 
-    <div class="container hidden" id="contact">
-        <h2>Contact</h2>
-        <ul>
-            <li>Personal Email: <a href="mailto:gktavva@gmail.com">gktavva@gmail.com</a></li>
-            <li>University Email: <a href="mailto:f20220372@pilani.bits-pilani.ac.in">f20220372@pilani.bits-pilani.ac.in</a></li>
-            <li>Phone: <a href="tel:+919515040803">+91 9515040803</a></li>
-            <li>LinkedIn: <a href="https://www.linkedin.com/in/gokula-krishna-tavva/">Gokula Krishna Tavva</a></li>
-            <li>GitHub: <a href="https://github.com/GKTavva">GKTavva</a></li>
-        </ul>
-    </div>
+        <div class="container hidden" id="certifications">
+            <h2>Certifications & Extracurricular</h2>
+            <h3>Extracurricular Activities</h3>
+            <div class="card"><strong>Team Captain – Inspired Karters Gravity</strong>Led 40-member team to All-India Rank 10 in a national-level competition.</div>
+            <div class="card"><strong>Structural and Dynamics Engineer – Team BITS</strong>Helped design a carbon fiber monocoque chassis with a Cd of 0.18 for Shell Eco-Marathon.</div>
+        
+            <h3>Certifications</h3>
+            <div class="card">SOLIDWORKS CAD Design Associate (CSWA) – Dassault Systèmes</div>
+            <div class="card">Flight Mechanics-The Basics – Certified by ISAE-SUPAERO</div>
 
-    <div class="container hidden" id="cv">
-        <h2>CV</h2>
-        <p>You can download my latest CV by clicking the link below:</p>
-        <a href="https://drive.google.com/drive/folders/1tmOrqEK6LjHvo57bofixA28NA7BrZpol?usp=sharing" target="_blank">Download CV</a>
-    </div>
+        
+        </div>
+
+        <div class="container hidden" id="contact">
+            <h2>Contact</h2>
+            <ul>
+                <li>Personal Email: <a href="mailto:gktavva@gmail.com">gktavva@gmail.com</a></li>
+                <li>University Email: <a href="mailto:f20220372@pilani.bits-pilani.ac.in">f20220372@pilani.bits-pilani.ac.in</a></li>
+                <li>Phone: <a href="tel:+919515040803">+91 9515040803</a></li>
+                <li>LinkedIn: <a href="https://www.linkedin.com/in/gokula-krishna-tavva/">Gokula Krishna Tavva</a></li>
+                <li>GitHub: <a href="https://github.com/GKTavva">GKTavva</a></li>
+            </ul>
+            <h3>Contact Form</h3>
+            <form action="mailto:gktavva@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+
+        <div class="container hidden" id="cv">
+            <h2>CV</h2>
+            <p>You can download my latest CV by clicking the link below:</p>
+            <a href="https://drive.google.com/drive/folders/1tmOrqEK6LjHvo57bofixA28NA7BrZpol?usp=sharing" target="_blank">Download CV</a>
+        </div>
+    </main>
 </body>
 </html>
