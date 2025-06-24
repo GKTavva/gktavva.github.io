@@ -1,34 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gokula Krishna Tavva</title>
     <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: Arial, sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 0; }
-        header { background: #1f1f1f; color: #b5e853; padding: 20px 0; text-align: center; }
-        header h1 { margin: 0; font-size: 32px; }
-        header h2 { margin: 0; font-size: 18px; color: #aaa; }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .light-mode {
+            background-color: #f4f4f4;
+            color: #000000;
+        }
+
+        header {
+            background: #1f1f1f;
+            color: #b2ed42;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .light-mode header {
+            background: #d3d3d3;
+            color: #333333;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #30b4b9fb;
+        }
+
         .profile-photo {
-        text-align: center;
-        margin-bottom: 20px;}
-        .profile-photo img { width: 150px; height: 200px; border-radius: 50%; border: 3px solid #b5e853; margin-bottom: 10px; object-fit: cover; }
-        .nav-links { margin-top: 10px; }
-        .nav-links a { color: #b5e853; margin: 0 10px; text-decoration: none; cursor: pointer; }
-        .nav-links a:hover, .nav-links a.active { text-decoration: underline; color: #ffffff; font-weight: bold; }
-        .container { width: 100%; margin: 20px auto; background: #1e1e1e; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); box-sizing: border-box; }
-        .hidden { display: none; }
-        h2 { color: #b5e853; border-bottom: 2px solid #b5e853; padding-bottom: 5px; margin-top: 30px; }
-        h3 { color: #b5e853; margin-top: 20px; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 8px; }
-        a { color: #4FC3F7; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        input, textarea { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; background-color: #2e2e2e; color: #fff; }
-        input[type="submit"] { background-color: #b5e853; color: #000; cursor: pointer; border: none; }
-        .card { background: #2a2a2a; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
-        .card strong { color: #b5e853; display: block; margin-bottom: 5px; }
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-photo img {
+            width: 150px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #b5e853;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            margin-top: 10px;
+        }
+
+        .nav-links a {
+            color: #b5e853;
+            margin: 0 10px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            text-decoration: underline;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .light-mode .nav-links a {
+            color: #333333;
+        }
+
+        .light-mode .nav-links a:hover,
+        .light-mode .nav-links a.active {
+            color: #000000;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 100%;
+            margin: 20px auto;
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+        }
+
+        .light-mode .container {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h2 {
+            color: #b5e853;
+            border-bottom: 2px solid #b5e853;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #b5e853;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a {
+            color: #4FC3F7;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #2e2e2e;
+            color: #fff;
+        }
+
+        input[type="submit"] {
+            background-color: #b5e853;
+            color: #000;
+            cursor: pointer;
+            border: none;
+        }
+
+        .card {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .light-mode .card {
+            background: #f0f0f0;
+        }
+
+        .card strong {
+            color: #b5e853;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .light-mode .card strong {
+            color: #333333;
+        }
+
+        .mode-toggle {
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 50%;
+            background-color: #b5e853;
+            color: #000000;
+            font-size: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
     </style>
     <script>
         function showSection(sectionId) {
@@ -39,12 +203,29 @@
             navLinks.forEach(link => link.classList.remove('active'));
             event.target.classList.add('active');
         }
-        window.onload = function() {
+
+        function toggleTheme() {
+            const body = document.body;
+            const toggleButton = document.getElementById('themeToggle');
+
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                toggleButton.textContent = '🌙';
+            } else {
+                body.classList.add('light-mode');
+                toggleButton.textContent = '☀️';
+            }
+        }
+
+        window.onload = function () {
             showSection('about');
         }
     </script>
 </head>
+
+
 <body>
+    <button id="themeToggle" class="mode-toggle" onclick="toggleTheme()">🌙</button>
     <header>
         <h1><a href="#" onclick="showSection('about')" style="color: inherit; text-decoration: none;">Gokula Krishna Tavva</a></h1>
         <h2>Mechanical Engineering Student</h2>
@@ -108,6 +289,23 @@
                     Awarded Best Presentation among 134 papers.
                 </p>
             </div>
+
+            <div class="card">
+                <strong>
+                    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5287817">
+                        Preprint: Numerical formulation of Colburn j factor and Fanning friction f factor correlations for offset strip fins in compact heat exchangers using Computational Fluid Dynamics.
+                    </a>
+                </strong>
+                <p>This is a preprint of a paper submitted to a journal for peer review, presenting the development of continuous correlations for the Colburn j factor and Fanning friction f factor in rectangular offset strip fin compact heat exchangers.</p>
+            </div>
+
+        <h3>Research websites:</h3>
+            <ul>
+                <li><a href="https://scholar.google.com/citations?user=siKHckoAAAAJ&hl=en&authuser=1">Google Scholar</a></li>
+                <li><a href="https://www.researchgate.net/profile/Gokula-Tavva?ev=hdr_xprf">ResearchGate</a></li>
+                <li><a href="https://orcid.org/0009-0000-2733-2695">ORCID ID</a></li>
+            </ul>
+        
       </div>
 
 
@@ -180,5 +378,7 @@
             <a href="https://drive.google.com/drive/folders/1tmOrqEK6LjHvo57bofixA28NA7BrZpol?usp=sharing" target="_blank">Download CV</a>
         </div>
     </main>
+
 </body>
+
 </html>
