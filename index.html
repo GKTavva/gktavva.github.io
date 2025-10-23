@@ -9,30 +9,58 @@
         html {
             scroll-behavior: smooth;
         }
+        :root {
+    /* Dark mode colors (default) */
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --header-bg: #1f1f1f;
+            --header-text: #b2ed42;
+            --header-subtext: #30b4b9fb;
+            --link-color: #b5e853;
+            --link-hover: #ffffff;
+            --container-bg: #1e1e1e;
+            --card-bg: #2a2a2a;
+            --input-bg: #2e2e2e;
+            --input-border: #ccc;
+            --input-text: #fff;
+            --button-text: #000;
+
+        }
+
+        .light-mode {
+                --bg-color: #f4f4f4;
+                --color: #000000;
+                --h-bg: #d3d3d3;
+                --h-color: #333333;
+                --h-subtext: #2b7bc1fb;
+                --link-color: #f02323;
+
+        }
+
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
         }
 
         .light-mode {
-            background-color: #f4f4f4;
-            color: #000000;
+            background-color: var(--bg-color);
+            color: var(--color);
         }
 
         header {
-            background: #1f1f1f;
-            color: #b2ed42;
+            background: var(--header-bg);
+            color: var(--header-text);
             padding: 20px 0;
             text-align: center;
         }
 
         .light-mode header {
-            background: #d3d3d3;
-            color: #333333;
+            background: var(--h-bg);
+            color: var(--h-color);
         }
 
         header h1 {
@@ -40,10 +68,17 @@
             font-size: 32px;
         }
 
+
         header h2 {
             margin: 0;
             font-size: 18px;
-            color: #30b4b9fb;
+            color: var(--header-subtext);
+        }
+
+        .light-mode header h2 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--h-subtext);
         }
 
         .profile-photo {
@@ -55,7 +90,7 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            border: 3px solid #b5e853;
+            border: 3px solid var(--link-color);
             margin-bottom: 10px;
             object-fit: cover;
         }
@@ -65,7 +100,7 @@
         }
 
         .nav-links a {
-            color: #b5e853;
+            color: var(--link-color);
             margin: 0 10px;
             text-decoration: none;
             cursor: pointer;
@@ -75,17 +110,17 @@
         .nav-links a:hover,
         .nav-links a.active {
             text-decoration: underline;
-            color: #ffffff;
+            color: var(--link-hover);
             font-weight: bold;
         }
 
         .light-mode .nav-links a {
-            color: #333333;
+            color: var(--h-color);
         }
 
         .light-mode .nav-links a:hover,
         .light-mode .nav-links a.active {
-            color: #000000;
+            color: var(--color);
             font-weight: bold;
             text-decoration: underline;
         }
@@ -101,8 +136,8 @@
         }
 
         .light-mode .container {
-            background: #ffffff;
-            color: #000000;
+            background: var(--link-hover);
+            color: var(--color);
         }
 
         .hidden {
@@ -110,14 +145,14 @@
         }
 
         h2 {
-            color: #b5e853;
-            border-bottom: 2px solid #b5e853;
+            color: var(--link-color);
+            border-bottom: 2px solid var(--link-color);
             padding-bottom: 5px;
             margin-top: 30px;
         }
 
         h3 {
-            color: #b5e853;
+            color: var(--link-color);
             margin-top: 20px;
         }
 
@@ -152,7 +187,7 @@
         }
 
         input[type="submit"] {
-            background-color: #b5e853;
+            background-color: var(--link-color);
             color: #000;
             cursor: pointer;
             border: none;
@@ -170,7 +205,7 @@
         }
 
         .card strong {
-            color: #b5e853;
+            color: var(--link-color);
             display: block;
             margin-bottom: 5px;
         }
@@ -187,7 +222,7 @@
             padding: 10px;
             border: none;
             border-radius: 50%;
-            background-color: #b5e853;
+            background-color: var(--link-color);
             color: #000000;
             font-size: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -260,6 +295,8 @@
         <div class="container hidden" id="research">
             <h2>Research Experience</h2>
             <h3>Projects</h3>
+            <div class="card"><strong>SBLI modeling for Hypersonic Double-Cone Configurations with Blunt-Nose</strong>Performing IDDES simulations to study shock–boundary layer interactions over hypersonic double-cone geometries
+under varying nose bluntness, cone angles, and Mach numbers.</div>
             <div class="card"><strong>Development of 3D mesh generator for aerodynamic flows</strong>Developed a 3D mesh generator with metric-based anisotropic adaptation and solution-driven error estimation to optimize FEM solvers for aerodynamic flow simulations.</div>
             <div class="card"><strong>Hybrid CFD/DSMC modelling of high-altitude rocket plumes</strong>Developed a hybrid CFD-DSMC model for Falcon 9 plume expansion in the thermosphere with viscous and thermochemical effects.</div>
             <div class="card"><strong>Flow Analysis of a Multi-stage Dehumidifying Chamber</strong>Simulations conducted on a multi-stage conveyor-style system to optimize airflow and regulate output humidity.</div>
@@ -272,32 +309,35 @@
 
             <div class="card">
                 <strong>
-                    <a href="https://www.researchgate.net/publication/388585486_Vimana_Aerotech_and_the_Development_of_a_Tail-Sitter_VTOL_Drone_for_Research_as_Well_as_Commercial_Facilitation">
-                        Vimana Aerotech and the development of a tail-sitter VTOL drone for research and commercial facilitation
+                    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5352957">
+                        Numerical formulation of Colburn j factor and Fanning friction f factor correlations for offset strip fins in compact heat exchangers using Computational Fluid Dynamics. (Preprint)
                     </a>
                 </strong>
-                <p>Co-authored paper published at the 75th International Astronautical Congress, Milan, Italy.</p>
+                <p>This is a preprint of a paper submitted to a journal for peer review, presenting the development of continuous correlations for the Colburn j factor and Fanning friction f factor in rectangular offset strip fin compact heat exchangers.</p>
             </div>
-            
+
             <div class="card">
                 <strong>
-                    Colburn ‘j’ factor analysis for offset strip fins in compact heat exchangers (Under Review)
+                    <a href="https://doi.org/10.31224/5664">    
+                        Colburn ‘j’ factor analysis for offset strip fins in compact heat exchangers. (Preprint)
+                    </a>
                 </strong>
-                <p>
-                    Presented research on Colburn ‘j’ factor for offset strip fins in laminar and turbulent regimes in 
-                    <a href="https://www.bits-pilani.ac.in/icgtme-2025/" target="_blank">ICGTME-2025</a>. 
-                    Awarded Best Presentation among 134 papers.
+                <p>Presented research on Colburn ‘j’ factor for offset strip fins in laminar and turbulent regimes in <a href="https://www.bits-pilani.ac.in/icgtme-2025/">ICGTME-2025</a>. 
+                   Awarded Best Presentation among 134 papers.
                 </p>
             </div>
 
             <div class="card">
                 <strong>
-                    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5352957">
-                        Preprint: Numerical formulation of Colburn j factor and Fanning friction f factor correlations for offset strip fins in compact heat exchangers using Computational Fluid Dynamics.
+                    <a href="https://doi.org/10.52202/078383-0071">
+                        Vimana Aerotech and the development of a tail-sitter VTOL drone for research and commercial facilitation.
                     </a>
                 </strong>
-                <p>This is a preprint of a paper submitted to a journal for peer review, presenting the development of continuous correlations for the Colburn j factor and Fanning friction f factor in rectangular offset strip fin compact heat exchangers.</p>
+                <p>Co-authored paper published at the 75th International Astronautical Congress, Milan, Italy.</p>
             </div>
+            
+
+            
             
             <h3>Project Portfolio</h3>
             <div class="profile-photo">
@@ -318,10 +358,14 @@
 
         <div class="container hidden" id="experience">
             <h2>Work Experience</h2>
-            <div class="card"><strong>Simulation Engineer – Serendipity Space</strong>Executed thermal simulations for a space payload studying pharmaceutical stability in zero-gravity.</div>
-            <div class="card"><strong>Undergraduate Teaching Assistant – BITS Pilani</strong><br>Workshop Division: Prepared SOPs and lab manuals.<br>Applied Thermodynamics: Supported evaluations and student engagement.</div>
+            <!-- <div class="card"><strong>Simulation Engineer – Serendipity Space</strong>Executed thermal simulations for a space payload studying pharmaceutical stability in zero-gravity.</div> -->
             <div class="card"><strong>Summer Intern – TATA Advanced Systems Limited</strong>Developed a color-coded fixture management system improving efficiency by 80%.</div>
             <div class="card"><strong>Flight Testing Engineer & CAD Designer – Vimana Aerotech</strong>Designed custom UAV mounts and beta-tested tail-sitter drone for extended endurance.</div>
+            
+            <h2>Teaching and Mentoring</h2>
+            <div class="card"><strong>Undergraduate Teaching Assistant – BITS Pilani</strong><br>Writing Practice: Evaluations, live sessions, and preparing questions.<br>Workshop Division: Prepared SOPs and lab manuals.<br>Applied Thermodynamics: Supported evaluations and student engagement.</div>
+            <div class="card"><strong>Mentor - Peer Mentorship Program</strong><br>Mentored and guided a group of \textbf{7} freshmen through their personal and professional lives.</div>
+            
         </div>
 
          <div class="container hidden" id="grants">
@@ -331,8 +375,9 @@
             <div class="card"><strong>AUGSD, BITS Pilani:</strong>PCM and nanofluid-based cooling tech for EV batteries under vibration; INR 33k</div>
 
             <h2>Achievements</h2>
-            <div class="card"><strong>First Place in Prototype: Project Presentation Competition</strong>Secured 1st Place among 237 participants in the competition and was awarded a cash prize of INR 35K.</div>
-             
+            <div class="card"><strong>Prototype: Project Presentation Competition</strong>Secured 1st Place among 237 participants in the competition and was awarded a cash prize of INR 35K.</div>
+            <div class="card"><strong>CAD-a-thon</strong>Achieved 2nd place out of 93 teams for designing a multipurpose furniture model, optimizing key design parameters.</div>
+            <!-- <div class="card"><strong>First Place in Prototype: Project Presentation Competition</strong>Secured 1st Place among 237 participants in the competition and was awarded a cash prize of INR 35K.</div> -->
         </div>
 
         <div class="container hidden" id="certifications">
@@ -350,7 +395,7 @@
 
         <div class="container hidden" id="contact">
             <section id="contact" class="contact-section" style="padding: 2rem 0;">
-            <h2 style="color: #a8ff60; margin-bottom: 1rem;">Fill the below form</h2>
+            <h2 style="color: var(--link-color); margin-bottom: 1rem;">Fill the below form</h2>
             
             <div style="display: flex; justify-content: center;">
                 <iframe 
@@ -389,7 +434,3 @@
 </body>
 
 </html>
-
-
-
-
