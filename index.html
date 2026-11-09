@@ -1,440 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gokula Krishna Tavva</title>
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        :root {
-    /* Dark mode colors (default) */
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --header-bg: #1f1f1f;
-            --header-text: #b2ed42;
-            --header-subtext: #30b4b9fb;
-            --link-color: #b5e853;
-            --link-hover: #ffffff;
-            --container-bg: #1e1e1e;
-            --card-bg: #2a2a2a;
-            --input-bg: #2e2e2e;
-            --input-border: #ccc;
-            --input-text: #fff;
-            --button-text: #000;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gokula Krishna Tavva</title>
+<meta name="description" content="MS student in Aeronautics and Astronautics at Purdue, working on high-speed flows, CFD and detonation physics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6fb;--card:#fff;--text:#14213d;--mute:#56667f;--line:#e2e8f2;--acc:#2563eb;--accink:#fff;--c1:#2563eb;--c2:#0ea5a4;--c3:#f59e0b;--c4:#7c5cfa;--sh:0 6px 24px rgba(20,33,61,.08);--navy:#0b1f3a;--f:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+[data-theme=dark]{--bg:#0a1628;--card:#112240;--text:#e6edf7;--mute:#9fb0c8;--line:#1e3557;--acc:#5cc8ff;--accink:#0a1628;--sh:0 6px 24px rgba(0,0,0,.35)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.65 var(--f)}
+a{color:var(--acc)}
+:focus-visible{outline:3px solid var(--c3);outline-offset:2px}
+.theme{position:fixed;top:1rem;right:1rem;z-index:20;width:2.6rem;height:2.6rem;border-radius:50%;border:0;background:#fff;box-shadow:var(--sh);font-size:1.2rem;cursor:pointer}
 
-        }
+/* hero */
+#top{position:relative;height:84svh;min-height:540px;overflow:hidden;background:var(--navy);color:#fff}
+#flow{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+#top::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,var(--navy) 0,rgba(11,31,58,.7) 30%,transparent 62%)}
+.hero-text{position:absolute;z-index:2;left:clamp(1.25rem,5vw,4rem);bottom:5.5rem;max-width:min(50rem,90vw);pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.chips span{padding:.3rem .85rem;border-radius:999px;font-weight:600;font-size:.85rem;color:#fff}
+.chips span:nth-child(1){background:var(--c1)}.chips span:nth-child(2){background:var(--c2)}.chips span:nth-child(3){background:var(--c4)}.chips span:nth-child(4){background:#d97706}
+h1{font:800 clamp(2.4rem,7vw,5.2rem)/1.03 var(--f);margin:0 0 .9rem;letter-spacing:-.03em}
+h1 a{color:inherit;text-decoration:none;pointer-events:auto}
+.sub{font-size:clamp(1rem,2vw,1.25rem);color:#c3d1e6;margin:0;max-width:34rem}
+.mach{position:absolute;z-index:3;right:clamp(1rem,4vw,3rem);bottom:5.5rem;width:min(17rem,calc(100vw - 2rem));background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:18px;padding:1rem 1.1rem;backdrop-filter:blur(8px)}
+.mach label{font-weight:600}
+.mach output{display:block;font:800 1.4rem/1.3 var(--f);color:#ffc15a}
+.mach small{display:block;color:#c3d1e6;margin-top:.4rem;line-height:1.4}
+input[type=range]{width:100%;accent-color:#f59e0b;margin:.5rem 0 0}
 
-        .light-mode {
-                --bg-color: #f4f4f4;
-                --color: #000000;
-                --h-bg: #d3d3d3;
-                --h-color: #333333;
-                --h-subtext: #2b7bc1fb;
-                --link-color: #f02323;
+/* tabs */
+.tabs{position:sticky;top:.75rem;z-index:10;margin:-1.75rem auto 0;width:min(1100px,calc(100% - 1.5rem));display:flex;gap:.25rem;overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.4rem;box-shadow:var(--sh);scroll-margin-top:.75rem}
+.tabs button{flex:none;border:0;background:none;color:var(--mute);font:600 .95rem var(--f);padding:.6rem 1.05rem;border-radius:999px;cursor:pointer;white-space:nowrap}
+.tabs button:hover{color:var(--text)}
+.tabs button[aria-selected=true]{background:var(--acc);color:var(--accink)}
 
-        }
-
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-        }
-
-        .light-mode {
-            background-color: var(--bg-color);
-            color: var(--color);
-        }
-
-        header {
-            background: var(--header-bg);
-            color: var(--header-text);
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        .light-mode header {
-            background: var(--h-bg);
-            color: var(--h-color);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-        }
-
-
-        header h2 {
-            margin: 0;
-            font-size: 18px;
-            color: var(--header-subtext);
-        }
-
-        .light-mode header h2 {
-            margin: 0;
-            font-size: 18px;
-            color: var(--h-subtext);
-        }
-
-        .profile-photo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .profile-photo img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 3px solid var(--link-color);
-            margin-bottom: 10px;
-            object-fit: cover;
-        }
-
-        .nav-links {
-            margin-top: 10px;
-        }
-
-        .nav-links a {
-            color: var(--link-color);
-            margin: 0 10px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            text-decoration: underline;
-            color: var(--link-hover);
-            font-weight: bold;
-        }
-
-        .light-mode .nav-links a {
-            color: var(--h-color);
-        }
-
-        .light-mode .nav-links a:hover,
-        .light-mode .nav-links a.active {
-            color: var(--color);
-            font-weight: bold;
-            text-decoration: underline;
-        }
-
-        .container {
-            width: 100%;
-            margin: 20px auto;
-            background: #1e1e1e;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            box-sizing: border-box;
-        }
-
-        .light-mode .container {
-            background: var(--link-hover);
-            color: var(--color);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        h2 {
-            color: var(--link-color);
-            border-bottom: 2px solid var(--link-color);
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
-
-        h3 {
-            color: var(--link-color);
-            margin-top: 20px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        a {
-            color: #4FC3F7;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #2e2e2e;
-            color: #fff;
-        }
-
-        input[type="submit"] {
-            background-color: var(--link-color);
-            color: #000;
-            cursor: pointer;
-            border: none;
-        }
-
-        .card {
-            background: #2a2a2a;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .light-mode .card {
-            background: #f0f0f0;
-        }
-
-        .card strong {
-            color: var(--link-color);
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .light-mode .card strong {
-            color: #333333;
-        }
-
-        .mode-toggle {
-            cursor: pointer;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px;
-            border: none;
-            border-radius: 50%;
-            background-color: var(--link-color);
-            color: #000000;
-            font-size: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
-    </style>
-    <script>
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.container');
-            sections.forEach(section => section.classList.add('hidden'));
-            document.getElementById(sectionId).classList.remove('hidden');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => link.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-
-        function toggleTheme() {
-            const body = document.body;
-            const toggleButton = document.getElementById('themeToggle');
-
-            if (body.classList.contains('light-mode')) {
-                body.classList.remove('light-mode');
-                toggleButton.textContent = '🌙';
-            } else {
-                body.classList.add('light-mode');
-                toggleButton.textContent = '☀️';
-            }
-        }
-
-        window.onload = function () {
-            showSection('about');
-        }
-    </script>
+main{width:min(1100px,calc(100% - 2rem));margin:0 auto;padding:2.5rem 0 3rem}
+[hidden]{display:none!important}
+h2{font:800 clamp(1.5rem,3vw,2rem)/1.2 var(--f);margin:2.5rem 0 1.1rem;letter-spacing:-.01em}
+.tab>h2:first-child{margin-top:.5rem}
+h3{font:800 1.08rem/1.3 var(--f);margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1.1rem}
+.stack{display:grid;gap:1.1rem}
+.card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.5rem 1.4rem 1.3rem;box-shadow:var(--sh)}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--bar,var(--c1))}
+.grid>.card:nth-child(4n+2),.stack>.card:nth-child(4n+2){--bar:var(--c2)}
+.grid>.card:nth-child(4n+3),.stack>.card:nth-child(4n+3){--bar:var(--c3)}
+.grid>.card:nth-child(4n+4),.stack>.card:nth-child(4n+4){--bar:var(--c4)}
+.card p{margin:.45rem 0 0;color:var(--mute)}
+.card p b,.card li b{color:var(--text)}
+.card ul{margin:.5rem 0 0;padding-left:1.1rem;color:var(--mute)}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.3rem 1rem;align-items:baseline}
+.role{font-weight:600;color:var(--acc);margin-top:.15rem}
+.date{font-size:.85rem;font-weight:600;padding:.15rem .7rem;border-radius:999px;background:color-mix(in srgb,var(--acc) 13%,transparent);color:var(--acc);white-space:nowrap}
+.pill{display:inline-block;margin:.5rem .4rem 0 0;padding:.2rem .8rem;border:1.5px solid var(--acc);border-radius:999px;font-size:.85rem;font-weight:600;text-decoration:none;color:var(--acc)}
+.pill:hover{background:var(--acc);color:var(--accink)}
+.about{display:grid;grid-template-columns:12rem 1fr;gap:2rem;align-items:start}
+.about img{width:12rem;height:12rem;object-fit:cover;border-radius:28px;box-shadow:var(--sh);border:4px solid var(--card)}
+.about p{margin:0 0 1rem;max-width:68ch}
+.frame{position:relative;aspect-ratio:960/569;border-radius:20px;overflow:hidden;box-shadow:var(--sh);border:1px solid var(--line);background:var(--card)}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.form{max-width:800px;margin:0 auto;height:800px;border:1px solid var(--line);border-radius:20px;background:#fff}
+.contact li{margin-bottom:.6rem;color:var(--text)}
+.contact ul{list-style:none;padding:0;margin:0}
+.cv{text-align:center;padding:3rem 1rem}
+.btn{display:inline-block;margin-top:1rem;padding:.85rem 1.8rem;border-radius:999px;background:var(--acc);color:var(--accink);font-weight:800;text-decoration:none}
+.btn:hover{filter:brightness(1.1)}
+footer{text-align:center;color:var(--mute);padding:0 1rem 2.5rem;font-size:.9rem}
+@media(max-width:760px){
+ .about{grid-template-columns:1fr}
+ .mach{left:1rem;right:1rem;width:auto;bottom:auto;top:4rem}
+ .hero-text{bottom:4.5rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
-
-
 <body>
-    <button id="themeToggle" class="mode-toggle" onclick="toggleTheme()">🌙</button>
-    <header>
-        <h1><a href="#" onclick="showSection('about')" style="color: inherit; text-decoration: none;">Gokula Krishna Tavva</a></h1>
-        <h2>Mechanical Engineering Student</h2>
-        <div class="nav-links">
-            [ <a href="#" onclick="showSection('about')">About Me</a> |
-            <a href="#" onclick="showSection('research')">Research Experience</a> |
-            <a href="#" onclick="showSection('experience')">Work Experience</a> |
-            <a href="#" onclick="showSection('grants')">Grants & Achievements</a> |
-            <a href="#" onclick="showSection('certifications')">Certifications & Extracurricular</a> |
-            <a href="#" onclick="showSection('contact')">Contact Me</a> |
-            <a href="#" onclick="showSection('cv')">Curriculum Vitae</a> ]
-        </div>
-    </header>
+<button class="theme" id="theme" aria-label="Toggle light and dark theme">🌙</button>
 
-    <main>
-        <div class="container" id="about">
-            <h2>About Me</h2>
-            <div class="profile-photo">
-                <img src="images/profile.jpeg" alt="Gokula Krishna Tavva">
-            </div>
-            <p>I am a dedicated Mechanical Engineering student at BITS Pilani, with a strong foundation in CAD design, thermal systems, and simulation-based analysis. I hail from Vijayawada, Andhra Pradesh, and my academic journey has been shaped by a deep-rooted passion for aerodynamics and an evolving fascination in high-speed flows and their application in next-generation aerospace systems.<br> <br>
-                Driven by curiosity and a commitment to excellence, I aspire to pursue a master's degree and further research in aerospace engineering, particularly in high-speed flow dynamics. My goal is to contribute meaningfully to the advancement of the field through cutting-edge innovation and collaborative research.<br> <br>
-                Beyond technical expertise, I value interdisciplinary exposure and teamwork, which I believe are essential for engineering impactful, real-world solutions. I aim to apply these strengths to develop sustainable, socially relevant technologies that bridge the domains of mechanical and aerospace engineering.</p>
-            <h2>Education</h2>
-            <div class="card">Bachelor of Engineering in Mechanical Engineering, BITS Pilani (CGPA: 9.30/10.00)</div>
-            <h2>Technical Skills</h2>
-            <div class="card">Simulation: ANSYS Fluent, Sparta, OpenFOAM, Basilisk C, Simscale, ANSYS Structural</div>
-            <div class="card">Designing: SolidWorks, Autodesk Fusion, Creo Parametric, Autodesk AutoCAD, OpenVSP</div>
-            <div class="card">Others: Python, MATLAB, ParaView, NetGen, Gmsh, C++, C, LaTeX, Simulink, Ardupilot</div>
-        </div>
+<header id="top">
+  <canvas id="flow" aria-hidden="true"></canvas>
+  <div class="hero-text">
+    <div class="chips"><span>Purdue University</span><span>High-speed flows</span><span>CFD and DSMC</span><span>Detonation physics</span></div>
+    <h1><a href="#about" data-tab="about">Gokula Krishna Tavva</a></h1>
+    <p class="sub">MS student in Aeronautics and Astronautics at Purdue. I study how air behaves around fast vehicles, and how to simulate it.</p>
+  </div>
+  <div class="mach">
+    <label for="mach">Freestream speed</label>
+    <output id="machOut" for="mach"></output>
+    <input id="mach" type="range" min="0.3" max="5" step="0.1" value="2">
+    <small>Move your cursor to steer the blunt body. Past Mach 1.2 a bow shock forms and the air behind it heats up.</small>
+  </div>
+</header>
 
-        <div class="container hidden" id="research">
-            <h2>Research Experience</h2>
-            <h3>Projects</h3>
-            <div class="card"><strong>Simulation Study of Lanced Offset Fins of Compact Heat Exchangers in Transverse Flow Condition</strong>Exploring the thermo-hydraulic effects of lanced offset fins in transverse flow condition while using ML to develop correlations with more accurate predictions.</div>
-            <!-- <div class="card"><strong>SBLI Modeling for Hypersonic Double-Cone Configurations with Blunt-Nose</strong>Performing IDDES simulations to study shock–boundary layer interactions over hypersonic double-cone geometries
-under varying nose bluntness, cone angles, and Mach numbers.</div> -->
-            <div class="card"><strong>Hybrid CFD/DSMC Modelling of High-Altitude Rocket Plumes</strong>Developing a hybrid CFD-DSMC model for rocket plume expansion in the thermosphere with viscous and thermochemical effects.</div>
-            <div class="card"><strong>Development of 3D Mesh Generator for Aerodynamic Flows</strong>Developed a 3D mesh generator with metric-based anisotropic adaptation and solution-driven error estimation to optimize FEM solvers for aerodynamic flow simulations.</div>
-            <div class="card"><strong>Flow Analysis of a Multi-stage Dehumidifying Chamber</strong>Simulations conducted on a multi-stage conveyor-style system to optimize airflow and regulate output humidity.</div>
-            <div class="card"><strong><a href="https://gktavva.github.io/Offset_Strip_Fins/">Simulation Study of Lanced Offset Fins of Compact Heat Exchangers</a></strong>Developed thermo-hydraulic correlations for lanced offset fins using dimensional parameters like varying flow length, fin thickness, fin height and fin density over a Reynolds number range of 300 - 6000.</div>
-            <div class="card"><strong>Compact Refrigeration System for Fishing Boats</strong>Improved 3D models for compact, manufacturable, and repairable systems for Indo-Norway industry applications.</div>
-            <div class="card"><strong>PV Cell Performance with Magnetic Nanofluids</strong>Developed a cooling setup using nanofluids to improve solar panel efficiency via magnetic fluid dynamics.</div>
-            <div class="card"><strong>EV Battery Thermal Analysis Using PCM and Nanofluids</strong>Designed vibration-resistant heat rejection systems for improved battery and motor thermal management.</div>
+<nav class="tabs" id="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" data-tab="about">About me</button>
+  <button role="tab" data-tab="research">Research</button>
+  <button role="tab" data-tab="experience">Work experience</button>
+  <button role="tab" data-tab="grants">Grants and achievements</button>
+  <button role="tab" data-tab="extra">Certifications and extracurricular</button>
+  <button role="tab" data-tab="contact">Contact me</button>
+  <button role="tab" data-tab="cv">Curriculum vitae</button>
+</nav>
 
-            <h3>Publications</h3>
+<main>
+<!-- ABOUT -->
+<section class="tab" id="about" role="tabpanel">
+  <div class="about">
+    <img src="images/profile.jpeg" alt="Portrait of Gokula Krishna Tavva" onerror="this.style.display='none'">
+    <div>
+      <p>I’m an ambitious student with a strong interest in aerospace engineering, especially aerodynamics and computational fluid dynamics. What drives me is understanding how air moves around bodies, and using that knowledge to design vehicles that are faster and more efficient.</p>
+      <p>I’m fascinated by high-speed flows and the physics of extreme conditions. Whether I’m running fluid dynamics simulations or studying how different shapes perform at different speeds, I enjoy problems that push the limits of current technology.</p>
+      <p>I’m always looking to learn more, connect with others in the field, and take part in work that shapes the future of air travel.</p>
+    </div>
+  </div>
+  <h2>Education</h2>
+  <div class="grid">
+    <div class="card"><div class="head"><h3>Purdue University</h3><span class="date">Aug 2026 to expected May 2028</span></div>
+      <p class="role">MS, Aeronautics and Astronautics</p><p>West Lafayette, IN, USA. <b>Coursework:</b> Viscous Flows and Aerospace Propulsion.</p></div>
+    <div class="card"><div class="head"><h3>BITS Pilani</h3><span class="date">Oct 2022 to Jul 2026</span></div>
+      <p class="role">BE, Mechanical Engineering</p><p>Pilani, RJ, India. <b>GPA 9.33/10</b> (university top 3%). <b>Coursework:</b> Computational Fluid Dynamics, Gas Dynamics and FEM.</p></div>
+  </div>
+  <h2>Technical skills</h2>
+  <div class="grid">
+    <div class="card"><h3>Simulation</h3><p>ANSYS Fluent, PeleC, SPARTA DSMC, OpenFOAM, Basilisk C, SimScale, ANSYS Structural</p></div>
+    <div class="card"><h3>Designing</h3><p>SolidWorks, Autodesk Fusion, Creo Parametric, Autodesk AutoCAD, OpenVSP</p></div>
+    <div class="card"><h3>Others</h3><p>HPC, Python, MATLAB, ParaView, NetGen, Gmsh, C++, C, LaTeX, Simulink, ArduPilot</p></div>
+    <div class="card"><h3>Laboratory</h3><p>Wind tunnel testing (subsonic and supersonic) and heat transfer rigs</p></div>
+  </div>
+</section>
 
-            <div class="card">
-                <strong>
-                    <a href="https://doi.org/10.1115/1.4070448">
-                        Numerical formulation of Colburn j factor and Fanning friction f factor correlations for offset strip fins in compact heat exchangers using Computational Fluid Dynamics.
-                    </a>
-                </strong>
-                <p>Co-author in a paper published in ASME Journal of Heat and Mass Transfer.</p>
-            </div>
+<!-- RESEARCH -->
+<section class="tab" id="research" role="tabpanel" hidden>
+  <h2>Projects</h2>
+  <div class="grid">
+    <div class="card"><h3><a href="https://gktavva.github.io/Offset_Strip_Fins/">Lanced offset fins in compact heat exchangers</a></h3>
+      <p>Thermo-hydraulic correlations from 1000+ CFD cases across Re 300 to 6000, varying flow length, fin thickness, fin height and fin density, with ML for more accurate predictions. BITS Pilani, Jun 2024 to Feb 2025.</p>
+      <a class="pill" href="https://doi.org/10.1115/1.4070448">Journal paper</a></div>
+    <div class="card"><h3>Hybrid CFD/DSMC modelling of high-altitude rocket plumes</h3>
+      <p>A multiscale framework for plume expansion in the thermosphere with viscous and thermochemical effects, plus rocket-induced acoustic and gravity waves. UNSW, 2025 to 2026.</p>
+      <a class="pill" href="https://doi.org/10.31224/8755">Conference preprint</a></div>
+    <div class="card"><h3>3D anisotropic mesh generator</h3>
+      <p>Edge-primitive meshing with Hessian-based error estimation to drive adaptive refinement for FEM aerodynamic solvers. CAS Lab, IISc, 2025.</p>
+      <a class="pill" href="https://drive.google.com/file/d/123b6T1AWKMJIPCfqLF20NVnMq4AAHngy/view?usp=drivesdk">Bachelor thesis</a></div>
+    <div class="card"><h3>Conveyor-style dehumidifying chamber</h3>
+      <p>CFD optimization of airflow in a multi-stage industrial chamber, with analytical thermal predictions validated, in collaboration with the National Council for Cement and Building Materials. BITS Pilani, 2025.</p></div>
+    <div class="card"><h3>Compact refrigeration for fishing boats</h3>
+      <p>Compact, manufacturable and repairable 3D models for an Indo-Norway industry application.</p></div>
+    <div class="card"><h3>PV cell performance with magnetic nanofluids</h3>
+      <p>A nanofluid cooling setup that improves solar panel efficiency through magnetic fluid dynamics.</p></div>
+    <div class="card"><h3>EV battery thermal analysis with PCM and nanofluids</h3>
+      <p>Vibration-resistant heat rejection systems for better battery and motor thermal management.</p></div>
+  </div>
 
-            <div class="card">
-                <strong>
-                    <a href="https://doi.org/10.31224/5664">    
-                        Colburn ‘j’ factor analysis for offset strip fins in compact heat exchangers. (Preprint)
-                    </a>
-                </strong>
-                <p>Presented research on Colburn ‘j’ factor analysis of offset strip fins in <a href="https://www.bits-pilani.ac.in/icgtme-2025/">ICGTME-2025</a>. Awarded Best Presentation among 134 papers.
-                </p>
-                <p>To be published in Springer conference proceedings.</p>
-            </div>
+  <h2>Publications</h2>
+  <div class="stack">
+    <div class="card"><h3><a href="https://doi.org/10.1115/1.4070448">Numerical formulation of Colburn j factor and Fanning friction f factor correlations for offset strip fins in compact heat exchangers using Computational Fluid Dynamics</a></h3>
+      <p>Co-author. Published in the ASME Journal of Heat and Mass Transfer.</p></div>
+    <div class="card"><h3><a href="https://doi.org/10.31224/5664">Colburn j factor analysis for offset strip fins in compact heat exchangers (preprint)</a></h3>
+      <p>Presented at <a href="https://www.bits-pilani.ac.in/icgtme-2025/">ICGTME-2025</a> and awarded Best Presentation among 134 papers. To be published in Springer conference proceedings.</p></div>
+    <div class="card"><h3><a href="https://doi.org/10.52202/078383-0071">Vimana Aerotech and the development of a tail-sitter VTOL drone for research and commercial facilitation</a></h3>
+      <p>Co-author. Published at the 75th International Astronautical Congress, Milan, Italy.</p></div>
+  </div>
 
-            <div class="card">
-                <strong>
-                    <a href="https://doi.org/10.52202/078383-0071">
-                        Vimana Aerotech and the development of a tail-sitter VTOL drone for research and commercial facilitation.
-                    </a>
-                </strong>
-                <p>Co-authored paper published at the 75th International Astronautical Congress, Milan, Italy.</p>
-            </div>
-            
+  <h2>Project portfolio</h2>
+  <div class="frame"><iframe title="Project portfolio slides" src="https://view.officeapps.live.com/op/embed.aspx?src=https://GKTavva.github.io/projects/Project_Portfolio.pptx" loading="lazy"></iframe></div>
+  <a class="pill" href="https://GKTavva.github.io/projects/Project_Portfolio.pptx">Download the slides</a>
 
-            
-            
-            <h3>Project Portfolio</h3>
-            <div class="profile-photo">
-                <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=https://GKTavva.github.io/projects/Project_Portfolio.pptx" 
-                        width="960" height="569" frameborder="0">
-                </iframe>
-            </div>
+  <h2>Research profiles</h2>
+  <a class="pill" href="https://scholar.google.com/citations?user=siKHckoAAAAJ&amp;hl=en&amp;authuser=1">Google Scholar</a>
+  <a class="pill" href="https://www.researchgate.net/profile/Gokula-Tavva?ev=hdr_xprf">ResearchGate</a>
+  <a class="pill" href="https://orcid.org/0009-0000-2733-2695">ORCID</a>
+</section>
 
-            <h3>Research websites:</h3>
-            <ul>
-                <li><a href="https://scholar.google.com/citations?user=siKHckoAAAAJ&hl=en&authuser=1">Google Scholar</a></li>
-                <li><a href="https://www.researchgate.net/profile/Gokula-Tavva?ev=hdr_xprf">ResearchGate</a></li>
-                <li><a href="https://orcid.org/0009-0000-2733-2695">ORCID ID</a></li>
-            </ul>
-        
-      </div>
+<!-- EXPERIENCE -->
+<section class="tab" id="experience" role="tabpanel" hidden>
+  <h2>Work experience</h2>
+  <div class="stack">
+    <div class="card"><div class="head"><h3><a href="https://engineering.purdue.edu/CEPL/">CEPL Lab, Purdue University</a></h3><span class="date">Aug 2026 to present</span></div>
+      <p class="role">Graduate student researcher</p>
+      <ul><li>High-fidelity <b>compressible reacting-flow simulations</b> in <b>PeleC</b> to study shock–flame interactions and flame stabilization in supersonic detonation flows.</li><li>Advisor: Dr. Haifeng Wang.</li></ul></div>
+    <div class="card"><div class="head"><h3>Aerodynamics Lab (AAE 33401), Purdue University</h3><span class="date">Aug 2026 to present</span></div>
+      <p class="role">Graduate teaching assistant</p>
+      <ul><li>Supervising lab sessions for <b>35 students</b> and evaluating their lab reports and experimental work.</li><li>Guiding students through <b>data acquisition</b>, troubleshooting procedures and answering questions.</li></ul></div>
+    <div class="card"><div class="head"><h3>UNSW Canberra, Australia (remote)</h3><span class="date">May 2025 to Oct 2026</span></div>
+      <p class="role">Undergraduate student researcher</p>
+      <ul><li>Built a multiscale <b>hybrid CFD–DSMC framework</b> for rocket exhaust plume expansion in the thermosphere, including viscous and thermochemical effects.</li><li>Modelled <b>rocket-induced acoustic and gravity waves</b> to predict ionospheric disturbances, and <b>automated CFD–DSMC data coupling</b> with in-house scripts.</li><li>Advisor: Dr. George Bowden.</li></ul>
+      <a class="pill" href="https://doi.org/10.31224/8755">Conference preprint</a></div>
+    <div class="card"><div class="head"><h3><a href="https://caslab-iisc-aero.github.io">CAS Lab, IISc Bengaluru</a></h3><span class="date">May 2025 to Dec 2025</span></div>
+      <p class="role">Research intern</p>
+      <ul><li>Developed a 3D anisotropic <b>mesh generator</b> in Python using edge-primitive operations for adaptive CFD meshing.</li><li>Implemented <b>Hessian-based error estimation</b> to drive adaptive mesh refinement.</li><li>Advisor: Dr. Aravind Balan.</li></ul>
+      <a class="pill" href="https://drive.google.com/file/d/123b6T1AWKMJIPCfqLF20NVnMq4AAHngy/view?usp=drivesdk">Bachelor thesis</a></div>
+    <div class="card"><div class="head"><h3>TATA Advanced Systems Limited, Nagpur</h3><span class="date">Jun 2024 to Jul 2024</span></div>
+      <p class="role">Production intern</p>
+      <ul><li>Built a <b>color-coded</b> fixture management system in MATLAB, cutting search time by up to <b>60%</b>.</li><li>Designed <b>ergonomic fixtures</b> with better grip for safer handling during machining.</li></ul>
+      <a class="pill" href="https://drive.google.com/file/d/10-iwGjO05WHx314oLeSfgB7zjbqp5Gr1/view?usp=drivesdk">Certificate</a></div>
+    <div class="card"><div class="head"><h3>Vimana Aerotech, Pilani</h3><span class="date">Sep 2023 to Jan 2025</span></div>
+      <p class="role">Prototyping engineer</p>
+      <ul><li>Ran <b>50+ flight tests</b> of the NARSIMHA <b>tail-sitter VTOL</b> drone to assess long-duration performance.</li><li>Used 3D printing for <b>rapid prototyping</b> of custom hatches and motor mounts.</li></ul>
+      <a class="pill" href="https://doi.org/10.52202/078383-0071">Conference paper</a></div>
+  </div>
+  <h2>Teaching and mentoring</h2>
+  <div class="grid">
+    <div class="card"><h3>Undergraduate teaching assistant, BITS Pilani</h3>
+      <ul><li><b>Computer-Aided Design:</b> assisting in lab practice sessions.</li><li><b>Writing Practice:</b> evaluations, live sessions and preparing questions.</li><li><b>Workshop Division:</b> prepared SOPs and lab manuals.</li><li><b>Applied Thermodynamics:</b> supported evaluations and student engagement.</li></ul></div>
+    <div class="card"><h3>Mentor, Peer Mentorship Program</h3><p>Mentored and guided a group of 7 freshmen through their personal and professional lives.</p></div>
+  </div>
+</section>
 
+<!-- GRANTS -->
+<section class="tab" id="grants" role="tabpanel" hidden>
+  <h2>Grants</h2>
+  <div class="grid">
+    <div class="card"><div class="head"><h3>BVJCOE</h3><span class="date">INR 40k</span></div><p>Designing the Future: Solar-Powered Electric Vehicle for Sustainable Mobility</p></div>
+    <div class="card"><div class="head"><h3>AUGSD, BITS Pilani</h3><span class="date">INR 36k</span></div><p>Enhancement of PV module performance by magnetic nanofluid cooling</p></div>
+    <div class="card"><div class="head"><h3>AUGSD, BITS Pilani</h3><span class="date">INR 33k</span></div><p>PCM and nanofluid-based cooling tech for EV batteries under vibration</p></div>
+  </div>
+  <h2>Achievements</h2>
+  <div class="grid">
+    <div class="card"><h3>Best Presentation, ICGTME-2025</h3><p>Awarded among 134 papers for the Colburn j factor analysis of offset strip fins.</p></div>
+    <div class="card"><h3>Prototype: Project Presentation Competition</h3><p>1st place among 237 participants, with a cash prize of INR 35K.</p></div>
+    <div class="card"><h3>CAD-a-thon</h3><p>2nd place out of 93 teams for a multipurpose furniture model with optimized key design parameters.</p></div>
+  </div>
+</section>
 
-        <div class="container hidden" id="experience">
-            <h2>Work Experience</h2>
-            <!-- <div class="card"><strong>Simulation Engineer – Serendipity Space</strong>Executed thermal simulations for a space payload studying pharmaceutical stability in zero-gravity.</div> -->
-            <div class="card"><strong>Summer Intern – TATA Advanced Systems Limited</strong>Developed a color-coded fixture management system improving efficiency by 60%.</div>
-            <div class="card"><strong>Flight Testing Engineer & CAD Designer – Vimana Aerotech</strong>Designed custom UAV mounts and beta-tested tail-sitter drone for extended endurance.</div>
-            
-            <h2>Teaching and Mentoring</h2>
-            <div class="card"><strong>Undergraduate Teaching Assistant – BITS Pilani</strong><br>Computer-Aided Design: Assisting in laboratory practice sessions.<br>Writing Practice: Evaluations, live sessions, and preparing questions.<br>Workshop Division: Prepared SOPs and lab manuals.<br>Applied Thermodynamics: Supported evaluations and student engagement.</div>
-            <div class="card"><strong>Mentor - Peer Mentorship Program</strong><br>Mentored and guided a group of 7 freshmen through their personal and professional lives.</div>
-            
-        </div>
+<!-- CERTS + EXTRACURRICULAR -->
+<section class="tab" id="extra" role="tabpanel" hidden>
+  <h2>Extracurricular activities</h2>
+  <div class="grid">
+    <div class="card"><div class="head"><h3>Team captain, Inspired Karters Gravity</h3><span class="date">Jun 2024 to Jun 2025</span></div>
+      <p>BITS Pilani. Led <b>50+</b> members to a <b>top-10</b> finish in the endurance race at a national-level go-karting competition, managing a budget of <b>INR 1M+</b> and raising <b>INR 400K+</b> in team funding.</p></div>
+    <div class="card"><div class="head"><h3>Chassis and aerodynamics engineer, Team BITS</h3><span class="date">Apr 2023 to May 2024</span></div>
+      <p>Designed the carbon fiber aero package for a Shell Eco-Marathon prototype vehicle with a <b>drag coefficient of 0.18</b>, and spaceframes for <b>100%</b> ethanol-run and electric cars for Shell Eco-Marathon Asia-Pacific.</p></div>
+  </div>
+  <h2>Certifications</h2>
+  <div class="grid">
+    <div class="card"><h3>SOLIDWORKS CAD Design Associate (CSWA)</h3><p>Dassault Systèmes</p></div>
+    <div class="card"><h3>Flight Mechanics: The Basics</h3><p>Certified by ISAE-SUPAERO</p></div>
+  </div>
+</section>
 
-         <div class="container hidden" id="grants">
-            <h2>Grants</h2>
-            <div class="card"><strong>BVJCOE:</strong>Designing the Future: Solar-Powered Electric Vehicle for Sustainable Mobility; INR 40k</div>
-            <div class="card"><strong>AUGSD, BITS Pilani:</strong>Enhancement of PV module performance by magnetic nanofluid cooling; INR 36k</div>
-            <div class="card"><strong>AUGSD, BITS Pilani:</strong>PCM and nanofluid-based cooling tech for EV batteries under vibration; INR 33k</div>
+<!-- CONTACT -->
+<section class="tab" id="contact" role="tabpanel" hidden>
+  <h2>Send me a message</h2>
+  <iframe class="form" title="Contact form" src="https://docs.google.com/forms/d/e/1FAIpQLSfRFiBaxEzls_lSytPirDeTVyolXH8NffBOYhbQqRyS9PinZQ/viewform?embedded=true" width="100%" loading="lazy">Loading…</iframe>
+  <h2>Reach me directly</h2>
+  <div class="card contact"><ul>
+    <li><b>Personal email:</b> <a href="mailto:gktavva@gmail.com">gktavva@gmail.com</a></li>
+    <li><b>University email:</b> <a href="mailto:f20220372@pilani.bits-pilani.ac.in">f20220372@pilani.bits-pilani.ac.in</a></li>
+    <li><b>Phone:</b> <a href="tel:+17657019676">+1 (765) 701-9676</a></li>
+    <li><b>LinkedIn:</b> <a href="https://www.linkedin.com/in/gktavva/">linkedin.com/in/gktavva</a></li>
+    <li><b>GitHub:</b> <a href="https://github.com/GKTavva">GKTavva</a></li>
+  </ul></div>
+</section>
 
-            <h2>Achievements</h2>
-            <div class="card"><strong>Prototype: Project Presentation Competition</strong>Secured 1st Place among 237 participants in the competition and was awarded a cash prize of INR 35K.</div>
-            <div class="card"><strong>CAD-a-thon</strong>Achieved 2nd place out of 93 teams for designing a multipurpose furniture model, optimizing key design parameters.</div>
-            <!-- <div class="card"><strong>First Place in Prototype: Project Presentation Competition</strong>Secured 1st Place among 237 participants in the competition and was awarded a cash prize of INR 35K.</div> -->
-        </div>
+<!-- CV -->
+<section class="tab" id="cv" role="tabpanel" hidden>
+  <div class="card cv"><h2 style="margin-top:0">Curriculum vitae</h2>
+    <p>You can download my latest CV from the link below.</p>
+    <a class="btn" href="https://drive.google.com/drive/folders/1tmOrqEK6LjHvo57bofixA28NA7BrZpol?usp=sharing" target="_blank" rel="noopener">Download CV</a></div>
+</section>
+</main>
+<footer>Gokula Krishna Tavva, West Lafayette, Indiana</footer>
 
-        <div class="container hidden" id="certifications">
-            <h2>Certifications & Extracurricular</h2>
-            <h3>Extracurricular Activities</h3>
-            <div class="card"><strong>Team Captain – Inspired Karters Gravity</strong>Led 50-member team to All-India Rank 10 in a national-level competition.</div>
-            <div class="card"><strong>Structural and Dynamics Engineer – Team BITS</strong>Helped design a carbon fiber monocoque chassis with a Cd of 0.18 for Shell Eco-Marathon.</div>
-        
-            <h3>Certifications</h3>
-            <div class="card">SOLIDWORKS CAD Design Associate (CSWA) – Dassault Systèmes</div>
-            <div class="card">Flight Mechanics-The Basics – Certified by ISAE-SUPAERO</div>
+<script>
+(function(){
+  /* tabs and theme */
+  const tabs=[...document.querySelectorAll('[role=tab]')],panels=[...document.querySelectorAll('.tab')];
+  function show(id,scroll){
+    if(!panels.some(p=>p.id===id))id='about';
+    panels.forEach(p=>p.hidden=p.id!==id);
+    tabs.forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===id));
+    if(scroll)document.getElementById('tabs').scrollIntoView({behavior:'smooth'});
+    try{history.replaceState(null,'','#'+id)}catch(e){}
+  }
+  document.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(t){e.preventDefault();show(t.dataset.tab,true)}});
+  window.addEventListener('hashchange',()=>show(location.hash.slice(1),false));
+  show(location.hash.slice(1),false);
 
-        
-        </div>
+  const tb=document.getElementById('theme'),root=document.documentElement;
+  function setTheme(t){root.dataset.theme=t;tb.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+  let saved=null;try{saved=localStorage.getItem('theme')}catch(e){}
+  setTheme(saved||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  tb.addEventListener('click',()=>setTheme(root.dataset.theme==='dark'?'light':'dark'));
 
-        <div class="container hidden" id="contact">
-            <section id="contact" class="contact-section" style="padding: 2rem 0;">
-            <h2 style="color: var(--link-color); margin-bottom: 1rem;">Fill the below form</h2>
-            
-            <div style="display: flex; justify-content: center;">
-                <iframe 
-                src="https://docs.google.com/forms/d/e/1FAIpQLSfRFiBaxEzls_lSytPirDeTVyolXH8NffBOYhbQqRyS9PinZQ/viewform?embedded=true" 
-                width="100%" 
-                height="800" 
-                frameborder="0" 
-                marginheight="0" 
-                marginwidth="0"
-                style="max-width: 800px; border: none; background-color: transparent;">
-                Loading…
-                </iframe>
-            </div>
-
-            <h2>Reach out to me directly on:</h2>
-            <ul>
-                <li>Personal Email: <a href="mailto:gktavva@gmail.com">gktavva@gmail.com</a></li>
-                <li>University Email: <a href="mailto:f20220372@pilani.bits-pilani.ac.in">f20220372@pilani.bits-pilani.ac.in</a></li>
-                <li>Phone: <a href="tel:+919515040803">+91 9515040803</a></li>
-                <li>LinkedIn: <a href="https://www.linkedin.com/in/gokula-krishna-tavva/">Gokula Krishna Tavva</a></li>
-                <li>GitHub: <a href="https://github.com/GKTavva">GKTavva</a></li>
-            </ul>
-            
-            
-            </section>
-
-        </div>
-
-        <div class="container hidden" id="cv">
-            <h2>CV</h2>
-            <p>You can download my latest CV by clicking the link below:</p>
-            <a href="https://drive.google.com/drive/folders/1tmOrqEK6LjHvo57bofixA28NA7BrZpol?usp=sharing" target="_blank">Download CV</a>
-        </div>
-    </main>
-
+  /* airflow hero */
+  const cv=document.getElementById('flow'),cx=cv.getContext('2d'),hero=document.getElementById('top');
+  const rng=document.getElementById('mach'),out=document.getElementById('machOut');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,a,P=[],M=+rng.value,vis=true,mouse={x:0,y:0},body={x:0,y:0};
+  function spawn(p,any){p.x=any?Math.random()*W:-5;p.y=Math.random()*H;return p}
+  function clear(){cx.fillStyle='#0b1f3a';cx.fillRect(0,0,W,H)}
+  function size(){
+    const d=window.devicePixelRatio||1;
+    W=cv.clientWidth;H=cv.clientHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+    a=Math.max(34,Math.min(W,H)*.09);
+    body.x=mouse.x=W*(W<760?.55:.6);body.y=mouse.y=H*.4;
+    P=Array.from({length:Math.min(1400,Math.round(W*H/1500))},()=>spawn({},true));
+    clear();if(still)settle();
+  }
+  function shockX(y){ // bow shock: hyperbola whose far field follows the Mach angle
+    const mu=Math.asin(1/M),b=a*1.3,xs=body.x-a-a*(.2+1/(M*M-.5));
+    return xs+(Math.hypot(y-body.y,b)-b)/Math.tan(mu);
+  }
+  function label(){out.textContent='Mach '+M.toFixed(1)+' '+(M<.8?'subsonic':M<1.2?'transonic':M<5?'supersonic':'hypersonic')}
+  function step(){
+    cx.fillStyle='rgba(11,31,58,.16)';cx.fillRect(0,0,W,H);
+    body.x+=(mouse.x-body.x)*.08;body.y+=(mouse.y-body.y)*.08;
+    const sup=M>=1.2,U=1.2+M*1.6;cx.lineWidth=1;
+    for(const p of P){
+      const dx=p.x-body.x,dy=p.y-body.y,r2=dx*dx+dy*dy;
+      if(r2<a*a){spawn(p);continue}
+      let u=U,v=0,hot=false;
+      if(!sup||p.x>shockX(p.y)){          // potential flow around a cylinder
+        const k=a*a/(r2*r2);
+        u=U*(1-k*(dx*dx-dy*dy));v=-U*k*2*dx*dy;
+        if(sup){u*=.6;v*=.6;hot=true}      // slower, hotter air behind the shock
+      }
+      const x0=p.x,y0=p.y;p.x+=u*.5;p.y+=v*.5;
+      const s=Math.min(1,Math.hypot(u,v)/(U*1.6));
+      cx.strokeStyle=hot?'rgba(255,193,90,'+(.35+s*.5)+')':'rgba(92,200,255,'+(.25+s*.6)+')';
+      cx.beginPath();cx.moveTo(x0,y0);cx.lineTo(p.x,p.y);cx.stroke();
+      if(p.x>W+5||p.y<-5||p.y>H+5)spawn(p);
+    }
+    cx.beginPath();cx.arc(body.x,body.y,a,0,7);cx.fillStyle='#16396b';cx.fill();
+    cx.strokeStyle='#fff';cx.lineWidth=1.5;cx.stroke();
+    if(sup){
+      cx.beginPath();
+      for(let y=0;y<=H;y+=8){const x=shockX(y);y?cx.lineTo(x,y):cx.moveTo(x,y)}
+      cx.strokeStyle='rgba(255,193,90,.95)';cx.lineWidth=2;cx.stroke();
+    }
+  }
+  function settle(){clear();for(let i=0;i<160;i++)step()}
+  function loop(){if(vis)step();requestAnimationFrame(loop)}
+  rng.addEventListener('input',()=>{M=+rng.value;label();if(still)settle()});
+  hero.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top});
+  new IntersectionObserver(e=>{vis=e[0].isIntersecting}).observe(hero);
+  window.addEventListener('resize',size);
+  label();size();
+  if(!still)requestAnimationFrame(loop);
+})();
+</script>
 </body>
-
 </html>
-
-
-
