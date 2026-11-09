@@ -25,8 +25,18 @@ a{color:var(--acc)}
 .hero-text{position:absolute;z-index:2;left:clamp(1.25rem,5vw,4rem);bottom:5.5rem;max-width:min(50rem,90vw);pointer-events:none}
 .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
 .chips span{padding:.3rem .85rem;border-radius:999px;font-weight:600;font-size:.85rem;color:#fff}
-.chips span:nth-child(1){background:var(--c1)}.chips span:nth-child(2){background:var(--c2)}.chips span:nth-child(3){background:var(--c4)}.chips span:nth-child(4){background:#d97706}
-h1{font:800 clamp(2.4rem,7vw,5.2rem)/1.03 var(--f);margin:0 0 .9rem;letter-spacing:-.03em}
+.chips span:nth-child(1){background:var(--c1)}
+.chips span:nth-child(2){background:var(--c2)}
+.chips span:nth-child(3){background:var(--c4)}
+.chips span:nth-child(4){background:#d97706}
+.chips span:nth-child(5){background:#64748b}
+.chips span:nth-child(6){background:#0891b2}
+h1{
+  font:800 clamp(2.4rem,7vw,5.2rem)/1.03 var(--f);
+  margin:0 0 .9rem;
+  letter-spacing:-.03em;
+  white-space:nowrap;
+}
 h1 a{color:inherit;text-decoration:none;pointer-events:auto}
 .sub{font-size:clamp(1rem,2vw,1.25rem);color:#c3d1e6;margin:0;max-width:34rem}
 .mach{position:absolute;z-index:3;right:clamp(1rem,4vw,3rem);bottom:5.5rem;width:min(17rem,calc(100vw - 2rem));background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:18px;padding:1rem 1.1rem;backdrop-filter:blur(8px)}
@@ -95,7 +105,7 @@ footer{text-align:center;color:var(--mute);padding:0 1rem 2.5rem;font-size:.9rem
   <div class="hero-text">
     <div class="chips"><span>CFD</span><span>Detonation physics</span><span>Aerodynamics</span><span>High-speed flows</span><span>Rarefied Flows</span><span>Heat Exchangers</span></div>
     <h1><a href="#about" data-tab="about">Gokula Krishna Tavva</a></h1>
-    <p class="sub">It's only a matter of &delta;t.</p>
+    <p class="sub">It's only a matter of &Delta;t.</p>
   </div>
   <div class="mach">
     <label for="mach">Freestream Mach <output id="machOut"></output></label>
