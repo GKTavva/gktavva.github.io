@@ -30,10 +30,14 @@ h1{font:800 clamp(2.4rem,7vw,5.2rem)/1.03 var(--f);margin:0 0 .9rem;letter-spaci
 h1 a{color:inherit;text-decoration:none;pointer-events:auto}
 .sub{font-size:clamp(1rem,2vw,1.25rem);color:#c3d1e6;margin:0;max-width:34rem}
 .mach{position:absolute;z-index:3;right:clamp(1rem,4vw,3rem);bottom:5.5rem;width:min(17rem,calc(100vw - 2rem));background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:18px;padding:1rem 1.1rem;backdrop-filter:blur(8px)}
-.mach label{font-weight:600}
-.mach output{display:block;font:800 1.4rem/1.3 var(--f);color:#ffc15a}
-.mach small{display:block;color:#c3d1e6;margin-top:.4rem;line-height:1.4}
-input[type=range]{width:100%;accent-color:#f59e0b;margin:.5rem 0 0}
+.mach label{display:flex;justify-content:space-between;font-weight:600;margin-top:.7rem}
+.mach label:first-child{margin-top:0}
+.mach output{font-weight:800;color:#ffc15a}
+.mach small{display:block;color:#c3d1e6;margin-top:.6rem;line-height:1.4}
+.res{margin-top:.8rem;padding-top:.7rem;border-top:1px solid rgba(255,255,255,.25);font-size:.9rem;color:#c3d1e6}
+.res div{display:flex;justify-content:space-between}
+.res b{color:#ffc15a}
+input[type=range]{width:100%;accent-color:#f59e0b;margin:.4rem 0 0}
 
 /* tabs */
 .tabs{position:sticky;top:.75rem;z-index:10;margin:-1.75rem auto 0;width:min(1100px,calc(100% - 1.5rem));display:flex;gap:.25rem;overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.4rem;box-shadow:var(--sh);scroll-margin-top:.75rem}
@@ -75,7 +79,9 @@ h3{font:800 1.08rem/1.3 var(--f);margin:0}
 footer{text-align:center;color:var(--mute);padding:0 1rem 2.5rem;font-size:.9rem}
 @media(max-width:760px){
  .about{grid-template-columns:1fr}
+ #top{min-height:680px}
  .mach{left:1rem;right:1rem;width:auto;bottom:auto;top:4rem}
+ .mach small{display:none}
  .hero-text{bottom:4.5rem}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -87,15 +93,21 @@ footer{text-align:center;color:var(--mute);padding:0 1rem 2.5rem;font-size:.9rem
 <header id="top">
   <canvas id="flow" aria-hidden="true"></canvas>
   <div class="hero-text">
-    <div class="chips"><span>Purdue University</span><span>High-speed flows</span><span>CFD and DSMC</span><span>Detonation physics</span></div>
+    <div class="chips"><span>High-speed flows</span><span>CFD and DSMC</span><span>Detonation physics</span></div>
     <h1><a href="#about" data-tab="about">Gokula Krishna Tavva</a></h1>
     <p class="sub">MS student in Aeronautics and Astronautics at Purdue. I study how air behaves around fast vehicles, and how to simulate it.</p>
   </div>
   <div class="mach">
-    <label for="mach">Freestream speed</label>
-    <output id="machOut" for="mach"></output>
-    <input id="mach" type="range" min="0.3" max="5" step="0.1" value="2">
-    <small>Move your cursor to steer the blunt body. Past Mach 1.2 a bow shock forms and the air behind it heats up.</small>
+    <label for="mach">Freestream Mach <output id="machOut"></output></label>
+    <input id="mach" type="range" min="1.5" max="5" step="0.1" value="2.5">
+    <label for="wedge">Wedge half-angle <output id="angOut"></output></label>
+    <input id="wedge" type="range" min="5" max="30" step="1" value="15">
+    <div class="res">
+      <div>Shock angle β <b id="beta"></b></div>
+      <div>Mach behind shock <b id="m2"></b></div>
+      <div>Pressure rise p₂/p₁ <b id="pr"></b></div>
+    </div>
+    <small id="note"></small>
   </div>
 </header>
 
@@ -161,6 +173,8 @@ footer{text-align:center;color:var(--mute);padding:0 1rem 2.5rem;font-size:.9rem
 
   <h2>Publications</h2>
   <div class="stack">
+    <div class="card"><h3><a href="https://doi.org/10.31224/8755">Multiscale Hybrid CFD/DSMC Simulation of Rocket-Induced Atmospheric Waves for Ionospheric Disturbance Prediction (preprint)</a></h3>
+      <p>Co-author. Under review. Submitted for publication in the conference proceedings of <a href="https://mechmining.uq.edu.au/rgd34">RGD 2026</a> held in Brisbane, AUS.</p></div>
     <div class="card"><h3><a href="https://doi.org/10.1115/1.4070448">Numerical formulation of Colburn j factor and Fanning friction f factor correlations for offset strip fins in compact heat exchangers using Computational Fluid Dynamics</a></h3>
       <p>Co-author. Published in the ASME Journal of Heat and Mass Transfer.</p></div>
     <div class="card"><h3><a href="https://doi.org/10.31224/5664">Colburn j factor analysis for offset strip fins in compact heat exchangers (preprint)</a></h3>
@@ -290,60 +304,78 @@ footer{text-align:center;color:var(--mute);padding:0 1rem 2.5rem;font-size:.9rem
   setTheme(saved||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
   tb.addEventListener('click',()=>setTheme(root.dataset.theme==='dark'?'light':'dark'));
 
-  /* airflow hero */
-  const cv=document.getElementById('flow'),cx=cv.getContext('2d'),hero=document.getElementById('top');
-  const rng=document.getElementById('mach'),out=document.getElementById('machOut');
+  /* airflow hero: supersonic flow over a wedge, shock angle from the theta-beta-Mach relation */
+  const $=id=>document.getElementById(id),G=1.4,R2D=180/Math.PI;
+  const cv=$('flow'),cx=cv.getContext('2d'),hero=$('top'),rM=$('mach'),rD=$('wedge');
   const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let W,H,a,P=[],M=+rng.value,vis=true,mouse={x:0,y:0},body={x:0,y:0};
+  let W,H,L,P=[],M=+rM.value,vis=true,mouse={x:0,y:0},tip={x:0,y:0},S={};
+  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
   function spawn(p,any){p.x=any?Math.random()*W:-5;p.y=Math.random()*H;return p}
   function clear(){cx.fillStyle='#0b1f3a';cx.fillRect(0,0,W,H)}
+  // flow deflection theta for shock angle b at Mach m
+  function theta(m,b){return Math.atan(2/Math.tan(b)*(m*m*Math.sin(b)**2-1)/(m*m*(G+Math.cos(2*b))+2))}
+  function maxTheta(m){let t=0,bb=0;for(let b=Math.asin(1/m);b<=Math.PI/2;b+=.002){const v=theta(m,b);if(v>t){t=v;bb=b}}return{t,b:bb}}
+  function recalc(){
+    M=+rM.value;
+    const mx=maxTheta(M),want=rD.value/R2D,d=Math.min(want,mx.t*.97);
+    let lo=Math.asin(1/M),hi=mx.b;                       // weak-shock branch by bisection
+    for(let i=0;i<40;i++){const m=(lo+hi)/2;theta(M,m)<d?lo=m:hi=m}
+    const b=(lo+hi)/2,n2=(M*Math.sin(b))**2,rho=(G+1)*n2/((G-1)*n2+2),
+          Mn2=Math.sqrt(((G-1)*n2+2)/(2*G*n2-(G-1)));
+    S={b,d,tb:Math.tan(b),td:Math.tan(d),cd:Math.cos(d),sd:Math.sin(d),
+       v2:Math.sqrt(Math.cos(b)**2+(Math.sin(b)/rho)**2),   // speed ratio across the shock
+       M2:Mn2/Math.sin(b-d),pr:1+2*G/(G+1)*(n2-1)};
+    $('machOut').textContent=M.toFixed(1);
+    $('angOut').textContent=(d*R2D).toFixed(0)+'°'+(want>d?' (max)':'');
+    $('beta').textContent=(b*R2D).toFixed(1)+'°';
+    $('m2').textContent=S.M2.toFixed(2);$('pr').textContent=S.pr.toFixed(2);
+    $('note').textContent=want>d
+      ?'Beyond '+(mx.t*R2D).toFixed(0)+'° at Mach '+M.toFixed(1)+' the shock detaches into a curved bow shock, so the wedge is held at its limit.'
+      :'Move your cursor to steer the wedge. β comes from the θ–β–M oblique shock relation (γ = 1.4).';
+    if(still)settle();
+  }
   function size(){
     const d=window.devicePixelRatio||1;
     W=cv.clientWidth;H=cv.clientHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
-    a=Math.max(34,Math.min(W,H)*.09);
-    body.x=mouse.x=W*(W<760?.55:.6);body.y=mouse.y=H*.4;
+    L=Math.min(W*.3,340);
+    tip.x=mouse.x=W*(W<760?.3:.38);tip.y=mouse.y=H*.42;
     P=Array.from({length:Math.min(1400,Math.round(W*H/1500))},()=>spawn({},true));
-    clear();if(still)settle();
+    clear();
   }
-  function shockX(y){ // bow shock: hyperbola whose far field follows the Mach angle
-    const mu=Math.asin(1/M),b=a*1.3,xs=body.x-a-a*(.2+1/(M*M-.5));
-    return xs+(Math.hypot(y-body.y,b)-b)/Math.tan(mu);
-  }
-  function label(){out.textContent='Mach '+M.toFixed(1)+' '+(M<.8?'subsonic':M<1.2?'transonic':M<5?'supersonic':'hypersonic')}
   function step(){
     cx.fillStyle='rgba(11,31,58,.16)';cx.fillRect(0,0,W,H);
-    body.x+=(mouse.x-body.x)*.08;body.y+=(mouse.y-body.y)*.08;
-    const sup=M>=1.2,U=1.2+M*1.6;cx.lineWidth=1;
+    tip.x+=(mouse.x-tip.x)*.08;tip.y+=(mouse.y-tip.y)*.08;
+    const U=1.2+M*1.6,{b,tb,td,cd,sd,v2}=S;cx.lineWidth=1;
     for(const p of P){
-      const dx=p.x-body.x,dy=p.y-body.y,r2=dx*dx+dy*dy;
-      if(r2<a*a){spawn(p);continue}
+      const dx=p.x-tip.x,dy=p.y-tip.y,ay=Math.abs(dy),sg=dy<0?-1:1;
       let u=U,v=0,hot=false;
-      if(!sup||p.x>shockX(p.y)){          // potential flow around a cylinder
-        const k=a*a/(r2*r2);
-        u=U*(1-k*(dx*dx-dy*dy));v=-U*k*2*dx*dy;
-        if(sup){u*=.6;v*=.6;hot=true}      // slower, hotter air behind the shock
+      if(dx>0&&ay<dx*tb){                                  // between shock and wedge
+        if(dx<L&&ay<dx*td){spawn(p);continue}
+        u=U*v2*cd;v=sg*U*v2*sd;hot=true;                  // flow turned parallel to the face
       }
       const x0=p.x,y0=p.y;p.x+=u*.5;p.y+=v*.5;
-      const s=Math.min(1,Math.hypot(u,v)/(U*1.6));
+      const s=Math.min(1,Math.hypot(u,v)/(U*1.2));
       cx.strokeStyle=hot?'rgba(255,193,90,'+(.35+s*.5)+')':'rgba(92,200,255,'+(.25+s*.6)+')';
       cx.beginPath();cx.moveTo(x0,y0);cx.lineTo(p.x,p.y);cx.stroke();
       if(p.x>W+5||p.y<-5||p.y>H+5)spawn(p);
     }
-    cx.beginPath();cx.arc(body.x,body.y,a,0,7);cx.fillStyle='#16396b';cx.fill();
-    cx.strokeStyle='#fff';cx.lineWidth=1.5;cx.stroke();
-    if(sup){
-      cx.beginPath();
-      for(let y=0;y<=H;y+=8){const x=shockX(y);y?cx.lineTo(x,y):cx.moveTo(x,y)}
-      cx.strokeStyle='rgba(255,193,90,.95)';cx.lineWidth=2;cx.stroke();
-    }
+    cx.beginPath();cx.moveTo(tip.x,tip.y);cx.lineTo(tip.x+L,tip.y-L*td);cx.lineTo(tip.x+L,tip.y+L*td);cx.closePath();
+    cx.fillStyle='#16396b';cx.fill();cx.strokeStyle='#fff';cx.lineWidth=1.5;cx.stroke();
+    const R=W-tip.x;                                       // oblique shock, both sides
+    cx.beginPath();cx.moveTo(tip.x+R,tip.y-R*tb);cx.lineTo(tip.x,tip.y);cx.lineTo(tip.x+R,tip.y+R*tb);
+    cx.strokeStyle='rgba(255,193,90,.95)';cx.lineWidth=2;cx.stroke();
+    cx.beginPath();cx.arc(tip.x,tip.y,64,-b,0);cx.strokeStyle='rgba(255,255,255,.7)';cx.lineWidth=1;cx.stroke();
+    cx.fillStyle='#ffc15a';cx.font='600 14px sans-serif';cx.textBaseline='middle';
+    cx.fillText('β = '+(b*R2D).toFixed(1)+'°',tip.x+74*Math.cos(b/2),tip.y-74*Math.sin(b/2));
   }
   function settle(){clear();for(let i=0;i<160;i++)step()}
   function loop(){if(vis)step();requestAnimationFrame(loop)}
-  rng.addEventListener('input',()=>{M=+rng.value;label();if(still)settle()});
-  hero.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top});
+  rM.addEventListener('input',recalc);rD.addEventListener('input',recalc);
+  hero.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();
+    mouse.x=clamp(e.clientX-r.left,W*.1,W*.65);mouse.y=clamp(e.clientY-r.top,H*.22,H*.68)});
   new IntersectionObserver(e=>{vis=e[0].isIntersecting}).observe(hero);
-  window.addEventListener('resize',size);
-  label();size();
+  size();recalc();
+  window.addEventListener('resize',()=>{size();if(still)settle()});
   if(!still)requestAnimationFrame(loop);
 })();
 </script>
